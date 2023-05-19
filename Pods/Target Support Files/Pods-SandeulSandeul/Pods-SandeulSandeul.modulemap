@@ -1,0 +1,6 @@
+framework module Pods_SandeulSandeul {
+  umbrella header "Pods-SandeulSandeul-umbrella.h"
+
+  export *
+  module * { export * }
+}
