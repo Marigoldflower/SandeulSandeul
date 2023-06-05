@@ -7,5 +7,6 @@ target 'SandeulSandeul' do
 
   # Pods for SandeulSandeul
 	pod 'SnapKit'
+	pod 'Alamofire'
 
 end

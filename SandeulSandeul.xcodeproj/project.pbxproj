@@ -20,6 +20,16 @@
 		EA838FE72A1760C800B0D8FD /* CurrentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA838FE62A1760C800B0D8FD /* CurrentLocation.swift */; };
 		EA838FEA2A17657100B0D8FD /* CurrentWeatherNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA838FE92A17657100B0D8FD /* CurrentWeatherNetworkManager.swift */; };
 		EA838FEC2A17657C00B0D8FD /* CurrentLocationNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA838FEB2A17657C00B0D8FD /* CurrentLocationNetworkManager.swift */; };
+		EA85CFF02A29CB5900073809 /* MyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA85CFEF2A29CB5900073809 /* MyColor.swift */; };
+		EA85D0032A2A064200073809 /* IBMPlexSansKR-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85CFFB2A2A064100073809 /* IBMPlexSansKR-SemiBold.otf */; };
+		EA85D0042A2A064200073809 /* IBMPlexSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85CFFC2A2A064100073809 /* IBMPlexSansKR-Bold.otf */; };
+		EA85D0052A2A064200073809 /* IBMPlexSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85CFFD2A2A064100073809 /* IBMPlexSansKR-Light.otf */; };
+		EA85D0062A2A064200073809 /* IBMPlexSansKR-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85CFFE2A2A064100073809 /* IBMPlexSansKR-ExtraLight.otf */; };
+		EA85D0072A2A064200073809 /* IBMPlexSansKR-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85CFFF2A2A064100073809 /* IBMPlexSansKR-Thin.otf */; };
+		EA85D0082A2A064200073809 /* IBMPlexSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85D0002A2A064200073809 /* IBMPlexSansKR-Medium.otf */; };
+		EA85D0092A2A064200073809 /* IBMPlexSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85D0012A2A064200073809 /* IBMPlexSansKR-Regular.otf */; };
+		EA85D00A2A2A064200073809 /* IBMPlexSansKR-Text.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85D0022A2A064200073809 /* IBMPlexSansKR-Text.otf */; };
+		EA85D00C2A2AF49D00073809 /* CurrentLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA85D00B2A2AF49D00073809 /* CurrentLocationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +50,16 @@
 		EA838FE62A1760C800B0D8FD /* CurrentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocation.swift; sourceTree = "<group>"; };
 		EA838FE92A17657100B0D8FD /* CurrentWeatherNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherNetworkManager.swift; sourceTree = "<group>"; };
 		EA838FEB2A17657C00B0D8FD /* CurrentLocationNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationNetworkManager.swift; sourceTree = "<group>"; };
+		EA85CFEF2A29CB5900073809 /* MyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyColor.swift; sourceTree = "<group>"; };
+		EA85CFFB2A2A064100073809 /* IBMPlexSansKR-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-SemiBold.otf"; sourceTree = "<group>"; };
+		EA85CFFC2A2A064100073809 /* IBMPlexSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Bold.otf"; sourceTree = "<group>"; };
+		EA85CFFD2A2A064100073809 /* IBMPlexSansKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Light.otf"; sourceTree = "<group>"; };
+		EA85CFFE2A2A064100073809 /* IBMPlexSansKR-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-ExtraLight.otf"; sourceTree = "<group>"; };
+		EA85CFFF2A2A064100073809 /* IBMPlexSansKR-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Thin.otf"; sourceTree = "<group>"; };
+		EA85D0002A2A064200073809 /* IBMPlexSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Medium.otf"; sourceTree = "<group>"; };
+		EA85D0012A2A064200073809 /* IBMPlexSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Regular.otf"; sourceTree = "<group>"; };
+		EA85D0022A2A064200073809 /* IBMPlexSansKR-Text.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Text.otf"; sourceTree = "<group>"; };
+		EA85D00B2A2AF49D00073809 /* CurrentLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,10 +114,12 @@
 			children = (
 				EA838FC92A1752A800B0D8FD /* AppDelegate.swift */,
 				EA838FCB2A1752A800B0D8FD /* SceneDelegate.swift */,
+				EA85CFF12A29E1BD00073809 /* Font */,
+				EA85CFEE2A29CB4700073809 /* Extension */,
 				EA838FE82A17652D00B0D8FD /* Network */,
 				EA838FE32A175E3200B0D8FD /* Model */,
+				EA85CFEC2A29BABF00073809 /* ViewModel */,
 				EA838FDD2A17531200B0D8FD /* View */,
-				EA838FDE2A17531500B0D8FD /* Controller */,
 				EA838FD22A1752A900B0D8FD /* Assets.xcassets */,
 				EA838FD72A1752A900B0D8FD /* Info.plist */,
 			);
@@ -109,8 +131,8 @@
 			children = (
 				EA838FCF2A1752A800B0D8FD /* Main.storyboard */,
 				EA838FD42A1752A900B0D8FD /* LaunchScreen.storyboard */,
-				EA838FDF2A17533200B0D8FD /* MainInformationView.swift */,
-				EA838FE12A17534700B0D8FD /* TodayForecastView.swift */,
+				EA85CFED2A29BAD500073809 /* Cell */,
+				EA838FDE2A17531500B0D8FD /* Controller */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -139,6 +161,46 @@
 				EA838FE92A17657100B0D8FD /* CurrentWeatherNetworkManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		EA85CFEC2A29BABF00073809 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EA85D00B2A2AF49D00073809 /* CurrentLocationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		EA85CFED2A29BAD500073809 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				EA838FDF2A17533200B0D8FD /* MainInformationView.swift */,
+				EA838FE12A17534700B0D8FD /* TodayForecastView.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		EA85CFEE2A29CB4700073809 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				EA85CFEF2A29CB5900073809 /* MyColor.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		EA85CFF12A29E1BD00073809 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				EA85CFFC2A2A064100073809 /* IBMPlexSansKR-Bold.otf */,
+				EA85CFFE2A2A064100073809 /* IBMPlexSansKR-ExtraLight.otf */,
+				EA85CFFD2A2A064100073809 /* IBMPlexSansKR-Light.otf */,
+				EA85D0002A2A064200073809 /* IBMPlexSansKR-Medium.otf */,
+				EA85D0012A2A064200073809 /* IBMPlexSansKR-Regular.otf */,
+				EA85CFFB2A2A064100073809 /* IBMPlexSansKR-SemiBold.otf */,
+				EA85D0022A2A064200073809 /* IBMPlexSansKR-Text.otf */,
+				EA85CFFF2A2A064100073809 /* IBMPlexSansKR-Thin.otf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,7 +263,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA85D0072A2A064200073809 /* IBMPlexSansKR-Thin.otf in Resources */,
+				EA85D0032A2A064200073809 /* IBMPlexSansKR-SemiBold.otf in Resources */,
+				EA85D0082A2A064200073809 /* IBMPlexSansKR-Medium.otf in Resources */,
+				EA85D00A2A2A064200073809 /* IBMPlexSansKR-Text.otf in Resources */,
+				EA85D0062A2A064200073809 /* IBMPlexSansKR-ExtraLight.otf in Resources */,
 				EA838FD62A1752A900B0D8FD /* LaunchScreen.storyboard in Resources */,
+				EA85D0052A2A064200073809 /* IBMPlexSansKR-Light.otf in Resources */,
+				EA85D0092A2A064200073809 /* IBMPlexSansKR-Regular.otf in Resources */,
+				EA85D0042A2A064200073809 /* IBMPlexSansKR-Bold.otf in Resources */,
 				EA838FD32A1752A900B0D8FD /* Assets.xcassets in Resources */,
 				EA838FD12A1752A800B0D8FD /* Main.storyboard in Resources */,
 			);
@@ -261,8 +331,10 @@
 				EA838FEC2A17657C00B0D8FD /* CurrentLocationNetworkManager.swift in Sources */,
 				EA838FCA2A1752A800B0D8FD /* AppDelegate.swift in Sources */,
 				EA838FE02A17533200B0D8FD /* MainInformationView.swift in Sources */,
+				EA85CFF02A29CB5900073809 /* MyColor.swift in Sources */,
 				EA838FE72A1760C800B0D8FD /* CurrentLocation.swift in Sources */,
 				EA838FE22A17534700B0D8FD /* TodayForecastView.swift in Sources */,
+				EA85D00C2A2AF49D00073809 /* CurrentLocationViewModel.swift in Sources */,
 				EA838FE52A17605800B0D8FD /* CurrentWeather.swift in Sources */,
 				EA838FCC2A1752A800B0D8FD /* SceneDelegate.swift in Sources */,
 			);

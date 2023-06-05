@@ -8,19 +8,22 @@
 import UIKit
 import CoreLocation
 import SnapKit
+import Combine
 
 class WeatherController: UIViewController {
     
     let mainInformationView: MainInformationView = {
         let view = MainInformationView()
-        view.backgroundColor = .green
+        view.backgroundColor = .morningHoly
         return view
     }()
     
     
     let todayForecastView: TodayForecastView = {
         let view = TodayForecastView()
-        view.backgroundColor = .blue
+        view.backgroundColor = .morningDeep
+        view.layer.cornerRadius = 15
+        view.layer.masksToBounds = true
         return view
     }()
     
@@ -45,16 +48,23 @@ class WeatherController: UIViewController {
     }()
     
 
-    let locationManager = CLLocationManager()
     
+    
+    let locationManager = CLLocationManager()
+    let currentLocationViewModel = CurrentLocationViewModel()
+    var cancellables: Set<AnyCancellable> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindViewModel()
+        fetchNetwork()
+        view.backgroundColor = .morningHoly
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
         setupLayout()
         fillStackView()
         setupLocation()
+        
         
     }
     
@@ -77,10 +87,10 @@ class WeatherController: UIViewController {
         // MARK: - 스크롤 뷰 및 스택 뷰 레이아웃
     
         scrollView.snp.makeConstraints { make in
-            make.leading.equalTo(view.snp.leading)
-            make.top.equalTo(view.snp.top)
-            make.trailing.equalTo(view.snp.trailing)
-            make.bottom.equalTo(view.snp.bottom)
+            make.leading.equalTo(view.snp.leading).offset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.trailing.equalTo(view.snp.trailing).offset(-20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
         }
         
         
@@ -94,6 +104,7 @@ class WeatherController: UIViewController {
         
     }
     
+
     
     func fillStackView() {
         let companyArray = [mainInformationView, todayForecastView]
@@ -120,6 +131,19 @@ class WeatherController: UIViewController {
         locationManager.startUpdatingLocation()
         
     }
+    
+    
+    func fetchNetwork() {
+        currentLocationViewModel.fetchNetwork()
+    }
+    
+    // View와 ViewModel을 binding 해주는 코드를 생성한다. ⭐️
+    func bindViewModel() {
+        self.currentLocationViewModel.$networkPublisher.sink { [weak self] locationValue in
+            self?.mainInformationView.currentLocation = locationValue
+        }.store(in: &cancellables)
+    }
+    
     
 }
 

@@ -9,7 +9,7 @@ import Foundation
 
 // 1) 이 친구가 먼저 API Call을 때리고 받은 key로 CurrentWeather의 url값에 할당해주어야 함
 struct CurrentLocationElement: Codable {
-    let key: String // 반드시 필요함
+    let key: String // 반드시 필요함 얘가 추후에 CurrentWeather url에 할당을 해주어야 하는 값이기 때문임
     let type: String
     let localizedName: String
     let englishName: String
