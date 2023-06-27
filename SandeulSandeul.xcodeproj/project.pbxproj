@@ -8,6 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		DE6B7B4699ED7B2AA32A0142 /* Pods_SandeulSandeul.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BA1432BEAB6B70C7943A57 /* Pods_SandeulSandeul.framework */; };
+		EA3212912A2E072100A49FD5 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212902A2E072100A49FD5 /* Location.swift */; };
+		EA3212932A2E126100A49FD5 /* QueryParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212922A2E126100A49FD5 /* QueryParameter.swift */; };
+		EA3212952A2E15C900A49FD5 /* ForecastWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212942A2E15C900A49FD5 /* ForecastWeather.swift */; };
+		EA3212C32A305C3500A49FD5 /* GPStoGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212C22A305C3500A49FD5 /* GPStoGrid.swift */; };
+		EA3212C52A309F9700A49FD5 /* ForecastWeatherNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212C42A309F9700A49FD5 /* ForecastWeatherNetworkManager.swift */; };
+		EA3212C72A30A10E00A49FD5 /* ForecastWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212C62A30A10E00A49FD5 /* ForecastWeatherViewModel.swift */; };
+		EA3212C92A31D8E700A49FD5 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212C82A31D8E700A49FD5 /* UserDefaults.swift */; };
+		EA3212D22A331C3E00A49FD5 /* TodayForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212D12A331C3E00A49FD5 /* TodayForecastCell.swift */; };
+		EA3212D72A37179400A49FD5 /* ParticulateMatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212D62A37179400A49FD5 /* ParticulateMatter.swift */; };
+		EA3212D92A37188200A49FD5 /* ParticulateMatterNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212D82A37188200A49FD5 /* ParticulateMatterNetworkManager.swift */; };
+		EA3212DB2A371A0B00A49FD5 /* ParticulateMatterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212DA2A371A0B00A49FD5 /* ParticulateMatterViewModel.swift */; };
+		EA3212E12A39C61500A49FD5 /* SunsetAndSunrise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212E02A39C61500A49FD5 /* SunsetAndSunrise.swift */; };
+		EA3212E32A39C65D00A49FD5 /* SunsetAndSunriseNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212E22A39C65D00A49FD5 /* SunsetAndSunriseNetworkManager.swift */; };
+		EA3212E52A39C6F400A49FD5 /* SunsetAndSunriseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212E42A39C6F400A49FD5 /* SunsetAndSunriseViewModel.swift */; };
+		EA3212F52A495EC600A49FD5 /* ThreeDaysForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212F42A495EC600A49FD5 /* ThreeDaysForecast.swift */; };
+		EA3212F72A495EE300A49FD5 /* ThreeDaysForecastNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212F62A495EE300A49FD5 /* ThreeDaysForecastNetworkManager.swift */; };
+		EA3212F92A495FF400A49FD5 /* ThreeDaysForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212F82A495FF400A49FD5 /* ThreeDaysForecastViewModel.swift */; };
 		EA838FCA2A1752A800B0D8FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA838FC92A1752A800B0D8FD /* AppDelegate.swift */; };
 		EA838FCC2A1752A800B0D8FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA838FCB2A1752A800B0D8FD /* SceneDelegate.swift */; };
 		EA838FCE2A1752A800B0D8FD /* WeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA838FCD2A1752A800B0D8FD /* WeatherController.swift */; };
@@ -16,10 +33,6 @@
 		EA838FD62A1752A900B0D8FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA838FD42A1752A900B0D8FD /* LaunchScreen.storyboard */; };
 		EA838FE02A17533200B0D8FD /* MainInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA838FDF2A17533200B0D8FD /* MainInformationView.swift */; };
 		EA838FE22A17534700B0D8FD /* TodayForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA838FE12A17534700B0D8FD /* TodayForecastView.swift */; };
-		EA838FE52A17605800B0D8FD /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA838FE42A17605800B0D8FD /* CurrentWeather.swift */; };
-		EA838FE72A1760C800B0D8FD /* CurrentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA838FE62A1760C800B0D8FD /* CurrentLocation.swift */; };
-		EA838FEA2A17657100B0D8FD /* CurrentWeatherNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA838FE92A17657100B0D8FD /* CurrentWeatherNetworkManager.swift */; };
-		EA838FEC2A17657C00B0D8FD /* CurrentLocationNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA838FEB2A17657C00B0D8FD /* CurrentLocationNetworkManager.swift */; };
 		EA85CFF02A29CB5900073809 /* MyColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA85CFEF2A29CB5900073809 /* MyColor.swift */; };
 		EA85D0032A2A064200073809 /* IBMPlexSansKR-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85CFFB2A2A064100073809 /* IBMPlexSansKR-SemiBold.otf */; };
 		EA85D0042A2A064200073809 /* IBMPlexSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85CFFC2A2A064100073809 /* IBMPlexSansKR-Bold.otf */; };
@@ -29,13 +42,30 @@
 		EA85D0082A2A064200073809 /* IBMPlexSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85D0002A2A064200073809 /* IBMPlexSansKR-Medium.otf */; };
 		EA85D0092A2A064200073809 /* IBMPlexSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85D0012A2A064200073809 /* IBMPlexSansKR-Regular.otf */; };
 		EA85D00A2A2A064200073809 /* IBMPlexSansKR-Text.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85D0022A2A064200073809 /* IBMPlexSansKR-Text.otf */; };
-		EA85D00C2A2AF49D00073809 /* CurrentLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA85D00B2A2AF49D00073809 /* CurrentLocationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A35A58A094B4567F80D1DC42 /* Pods-SandeulSandeul.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SandeulSandeul.debug.xcconfig"; path = "Target Support Files/Pods-SandeulSandeul/Pods-SandeulSandeul.debug.xcconfig"; sourceTree = "<group>"; };
 		A5BA1432BEAB6B70C7943A57 /* Pods_SandeulSandeul.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SandeulSandeul.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE15352017E7FB5D40774363 /* Pods-SandeulSandeul.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SandeulSandeul.release.xcconfig"; path = "Target Support Files/Pods-SandeulSandeul/Pods-SandeulSandeul.release.xcconfig"; sourceTree = "<group>"; };
+		EA3212902A2E072100A49FD5 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		EA3212922A2E126100A49FD5 /* QueryParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParameter.swift; sourceTree = "<group>"; };
+		EA3212942A2E15C900A49FD5 /* ForecastWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastWeather.swift; sourceTree = "<group>"; };
+		EA3212C22A305C3500A49FD5 /* GPStoGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPStoGrid.swift; sourceTree = "<group>"; };
+		EA3212C42A309F9700A49FD5 /* ForecastWeatherNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastWeatherNetworkManager.swift; sourceTree = "<group>"; };
+		EA3212C62A30A10E00A49FD5 /* ForecastWeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastWeatherViewModel.swift; sourceTree = "<group>"; };
+		EA3212C82A31D8E700A49FD5 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		EA3212CA2A31E32100A49FD5 /* SandeulSandeul.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SandeulSandeul.entitlements; sourceTree = "<group>"; };
+		EA3212D12A331C3E00A49FD5 /* TodayForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayForecastCell.swift; sourceTree = "<group>"; };
+		EA3212D62A37179400A49FD5 /* ParticulateMatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticulateMatter.swift; sourceTree = "<group>"; };
+		EA3212D82A37188200A49FD5 /* ParticulateMatterNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticulateMatterNetworkManager.swift; sourceTree = "<group>"; };
+		EA3212DA2A371A0B00A49FD5 /* ParticulateMatterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticulateMatterViewModel.swift; sourceTree = "<group>"; };
+		EA3212E02A39C61500A49FD5 /* SunsetAndSunrise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunsetAndSunrise.swift; sourceTree = "<group>"; };
+		EA3212E22A39C65D00A49FD5 /* SunsetAndSunriseNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunsetAndSunriseNetworkManager.swift; sourceTree = "<group>"; };
+		EA3212E42A39C6F400A49FD5 /* SunsetAndSunriseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunsetAndSunriseViewModel.swift; sourceTree = "<group>"; };
+		EA3212F42A495EC600A49FD5 /* ThreeDaysForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDaysForecast.swift; sourceTree = "<group>"; };
+		EA3212F62A495EE300A49FD5 /* ThreeDaysForecastNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDaysForecastNetworkManager.swift; sourceTree = "<group>"; };
+		EA3212F82A495FF400A49FD5 /* ThreeDaysForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDaysForecastViewModel.swift; sourceTree = "<group>"; };
 		EA838FC62A1752A800B0D8FD /* SandeulSandeul.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SandeulSandeul.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA838FC92A1752A800B0D8FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA838FCB2A1752A800B0D8FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,10 +76,6 @@
 		EA838FD72A1752A900B0D8FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA838FDF2A17533200B0D8FD /* MainInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainInformationView.swift; sourceTree = "<group>"; };
 		EA838FE12A17534700B0D8FD /* TodayForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayForecastView.swift; sourceTree = "<group>"; };
-		EA838FE42A17605800B0D8FD /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
-		EA838FE62A1760C800B0D8FD /* CurrentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocation.swift; sourceTree = "<group>"; };
-		EA838FE92A17657100B0D8FD /* CurrentWeatherNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherNetworkManager.swift; sourceTree = "<group>"; };
-		EA838FEB2A17657C00B0D8FD /* CurrentLocationNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationNetworkManager.swift; sourceTree = "<group>"; };
 		EA85CFEF2A29CB5900073809 /* MyColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyColor.swift; sourceTree = "<group>"; };
 		EA85CFFB2A2A064100073809 /* IBMPlexSansKR-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-SemiBold.otf"; sourceTree = "<group>"; };
 		EA85CFFC2A2A064100073809 /* IBMPlexSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Bold.otf"; sourceTree = "<group>"; };
@@ -59,7 +85,6 @@
 		EA85D0002A2A064200073809 /* IBMPlexSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Medium.otf"; sourceTree = "<group>"; };
 		EA85D0012A2A064200073809 /* IBMPlexSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Regular.otf"; sourceTree = "<group>"; };
 		EA85D0022A2A064200073809 /* IBMPlexSansKR-Text.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Text.otf"; sourceTree = "<group>"; };
-		EA85D00B2A2AF49D00073809 /* CurrentLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +116,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EA3212C12A305C1200A49FD5 /* GPStoGrid */ = {
+			isa = PBXGroup;
+			children = (
+				EA3212C22A305C3500A49FD5 /* GPStoGrid.swift */,
+			);
+			path = GPStoGrid;
+			sourceTree = "<group>";
+		};
+		EA3212D32A331C4400A49FD5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EA838FDF2A17533200B0D8FD /* MainInformationView.swift */,
+				EA838FE12A17534700B0D8FD /* TodayForecastView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		EA838FBD2A1752A800B0D8FD = {
 			isa = PBXGroup;
 			children = (
@@ -112,8 +154,10 @@
 		EA838FC82A1752A800B0D8FD /* SandeulSandeul */ = {
 			isa = PBXGroup;
 			children = (
+				EA3212CA2A31E32100A49FD5 /* SandeulSandeul.entitlements */,
 				EA838FC92A1752A800B0D8FD /* AppDelegate.swift */,
 				EA838FCB2A1752A800B0D8FD /* SceneDelegate.swift */,
+				EA3212C12A305C1200A49FD5 /* GPStoGrid */,
 				EA85CFF12A29E1BD00073809 /* Font */,
 				EA85CFEE2A29CB4700073809 /* Extension */,
 				EA838FE82A17652D00B0D8FD /* Network */,
@@ -131,6 +175,7 @@
 			children = (
 				EA838FCF2A1752A800B0D8FD /* Main.storyboard */,
 				EA838FD42A1752A900B0D8FD /* LaunchScreen.storyboard */,
+				EA3212D32A331C4400A49FD5 /* View */,
 				EA85CFED2A29BAD500073809 /* Cell */,
 				EA838FDE2A17531500B0D8FD /* Controller */,
 			);
@@ -148,8 +193,10 @@
 		EA838FE32A175E3200B0D8FD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				EA838FE62A1760C800B0D8FD /* CurrentLocation.swift */,
-				EA838FE42A17605800B0D8FD /* CurrentWeather.swift */,
+				EA3212F42A495EC600A49FD5 /* ThreeDaysForecast.swift */,
+				EA3212942A2E15C900A49FD5 /* ForecastWeather.swift */,
+				EA3212D62A37179400A49FD5 /* ParticulateMatter.swift */,
+				EA3212E02A39C61500A49FD5 /* SunsetAndSunrise.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -157,8 +204,10 @@
 		EA838FE82A17652D00B0D8FD /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				EA838FEB2A17657C00B0D8FD /* CurrentLocationNetworkManager.swift */,
-				EA838FE92A17657100B0D8FD /* CurrentWeatherNetworkManager.swift */,
+				EA3212F62A495EE300A49FD5 /* ThreeDaysForecastNetworkManager.swift */,
+				EA3212C42A309F9700A49FD5 /* ForecastWeatherNetworkManager.swift */,
+				EA3212D82A37188200A49FD5 /* ParticulateMatterNetworkManager.swift */,
+				EA3212E22A39C65D00A49FD5 /* SunsetAndSunriseNetworkManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -166,7 +215,10 @@
 		EA85CFEC2A29BABF00073809 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				EA85D00B2A2AF49D00073809 /* CurrentLocationViewModel.swift */,
+				EA3212F82A495FF400A49FD5 /* ThreeDaysForecastViewModel.swift */,
+				EA3212C62A30A10E00A49FD5 /* ForecastWeatherViewModel.swift */,
+				EA3212DA2A371A0B00A49FD5 /* ParticulateMatterViewModel.swift */,
+				EA3212E42A39C6F400A49FD5 /* SunsetAndSunriseViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -174,8 +226,7 @@
 		EA85CFED2A29BAD500073809 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				EA838FDF2A17533200B0D8FD /* MainInformationView.swift */,
-				EA838FE12A17534700B0D8FD /* TodayForecastView.swift */,
+				EA3212D12A331C3E00A49FD5 /* TodayForecastCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -184,6 +235,9 @@
 			isa = PBXGroup;
 			children = (
 				EA85CFEF2A29CB5900073809 /* MyColor.swift */,
+				EA3212902A2E072100A49FD5 /* Location.swift */,
+				EA3212922A2E126100A49FD5 /* QueryParameter.swift */,
+				EA3212C82A31D8E700A49FD5 /* UserDefaults.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -326,17 +380,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA3212DB2A371A0B00A49FD5 /* ParticulateMatterViewModel.swift in Sources */,
 				EA838FCE2A1752A800B0D8FD /* WeatherController.swift in Sources */,
-				EA838FEA2A17657100B0D8FD /* CurrentWeatherNetworkManager.swift in Sources */,
-				EA838FEC2A17657C00B0D8FD /* CurrentLocationNetworkManager.swift in Sources */,
+				EA3212D22A331C3E00A49FD5 /* TodayForecastCell.swift in Sources */,
+				EA3212912A2E072100A49FD5 /* Location.swift in Sources */,
+				EA3212952A2E15C900A49FD5 /* ForecastWeather.swift in Sources */,
+				EA3212F72A495EE300A49FD5 /* ThreeDaysForecastNetworkManager.swift in Sources */,
+				EA3212F92A495FF400A49FD5 /* ThreeDaysForecastViewModel.swift in Sources */,
+				EA3212D72A37179400A49FD5 /* ParticulateMatter.swift in Sources */,
+				EA3212C92A31D8E700A49FD5 /* UserDefaults.swift in Sources */,
+				EA3212E12A39C61500A49FD5 /* SunsetAndSunrise.swift in Sources */,
+				EA3212C72A30A10E00A49FD5 /* ForecastWeatherViewModel.swift in Sources */,
 				EA838FCA2A1752A800B0D8FD /* AppDelegate.swift in Sources */,
 				EA838FE02A17533200B0D8FD /* MainInformationView.swift in Sources */,
+				EA3212E32A39C65D00A49FD5 /* SunsetAndSunriseNetworkManager.swift in Sources */,
+				EA3212D92A37188200A49FD5 /* ParticulateMatterNetworkManager.swift in Sources */,
+				EA3212C52A309F9700A49FD5 /* ForecastWeatherNetworkManager.swift in Sources */,
 				EA85CFF02A29CB5900073809 /* MyColor.swift in Sources */,
-				EA838FE72A1760C800B0D8FD /* CurrentLocation.swift in Sources */,
+				EA3212932A2E126100A49FD5 /* QueryParameter.swift in Sources */,
+				EA3212F52A495EC600A49FD5 /* ThreeDaysForecast.swift in Sources */,
+				EA3212E52A39C6F400A49FD5 /* SunsetAndSunriseViewModel.swift in Sources */,
 				EA838FE22A17534700B0D8FD /* TodayForecastView.swift in Sources */,
-				EA85D00C2A2AF49D00073809 /* CurrentLocationViewModel.swift in Sources */,
-				EA838FE52A17605800B0D8FD /* CurrentWeather.swift in Sources */,
 				EA838FCC2A1752A800B0D8FD /* SceneDelegate.swift in Sources */,
+				EA3212C32A305C3500A49FD5 /* GPStoGrid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +548,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SandeulSandeul/SandeulSandeul.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T9LJ52AQY5;
@@ -492,6 +559,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -511,6 +579,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SandeulSandeul/SandeulSandeul.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T9LJ52AQY5;
@@ -521,6 +590,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
