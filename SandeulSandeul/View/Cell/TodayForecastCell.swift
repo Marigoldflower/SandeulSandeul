@@ -14,16 +14,20 @@ final class TodayForecastCell: UICollectionViewCell {
     
     let time: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
         return label
     }()
     
     let weatherImage: UIImageView = {
         let imageView = UIImageView()
+        imageView.backgroundColor = .systemGray
         return imageView
     }()
-        
+    
+  
     let temperature: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
         return label
     }()
     
@@ -34,7 +38,7 @@ final class TodayForecastCell: UICollectionViewCell {
         let stack = UIStackView(arrangedSubviews: [time, weatherImage, temperature])
         stack.axis = .vertical
         stack.spacing = 5
-        stack.distribution = .fillEqually
+        stack.distribution = .fill
         return stack
     }()
     
@@ -54,8 +58,12 @@ final class TodayForecastCell: UICollectionViewCell {
         stackView.snp.makeConstraints { make in
             make.leading.equalTo(self.snp.leading).offset(20)
             make.trailing.equalTo(self.snp.trailing).offset(-20)
-            make.top.equalTo(self.snp.top).offset(0)
-            make.bottom.equalTo(self.snp.bottom).offset(0)
+            make.top.equalTo(self.snp.top).offset(20)
+            make.bottom.equalTo(self.snp.bottom).offset(-20)
+        }
+        
+        weatherImage.snp.makeConstraints { make in
+            make.width.height.equalTo(70)
         }
     }
     

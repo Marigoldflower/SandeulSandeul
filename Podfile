@@ -8,6 +8,7 @@ target 'SandeulSandeul' do
   # Pods for SandeulSandeul
 	pod 'SnapKit'
 	pod 'Alamofire'
+	pod 'SDWebImage'
 
 
 end

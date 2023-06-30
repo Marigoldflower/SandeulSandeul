@@ -33,6 +33,16 @@ class WeatherController: UIViewController {
     
     
     
+    let tenDaysForecastView: TenDaysForecastView = {
+        let view = TenDaysForecastView()
+        view.layer.cornerRadius = 15
+        view.layer.masksToBounds = true
+        view.backgroundColor = .red
+        return view
+    }()
+    
+    
+    
     // MARK: - 스택 뷰
     let stackView: UIStackView = {
         let stack = UIStackView() // arrangedSubview를 이용해서 바로 할당하지 말 것
@@ -197,7 +207,17 @@ class WeatherController: UIViewController {
         setupLayout()
         fillStackView()
         setupLocation()
+        
+        for family in UIFont.familyNames {
+            print(family)
+
+            for sub in UIFont.fontNames(forFamilyName: family) {
+                 print("====> \(sub)")
+            }
+        }
+        
     }
+    
     
     func setupLayout() {
         
@@ -238,7 +258,7 @@ class WeatherController: UIViewController {
     
     
     func fillStackView() {
-        let companyArray = [mainInformationView, todayForecastView]
+        let companyArray = [mainInformationView, todayForecastView, tenDaysForecastView]
         for company in companyArray {
             var elementView = UIView()
             elementView = company
@@ -299,20 +319,17 @@ class WeatherController: UIViewController {
                     guard let forecastTime = i.forecastTimeFormatter else { return }
                     
                     
-                    
                     print("현재 들어오는 시간은 \(i.time)")
                     
                     if i.time.contains(today) {
                         print("현재 날짜에 포함되는 값은 \(i.time)")
                         
                         if currentTime < forecastTime {
-                            print("여기에 포함되는 값은 \(forecastTime)")
                             self?.todayForecastView.timeArray.append(forecastTime)
                         }
                         
                     } else {
-                        print("현재 날짜가 아닌 날짜에 포함되는 값은 \(i.time)")
-//                        self?.todayForecastView.timeArray.append(forecastTime)
+                        self?.todayForecastView.timeArray.append(forecastTime)
                     }
                 }
             }
@@ -339,6 +356,59 @@ class WeatherController: UIViewController {
                 print("현재 시간은 \(currentTime)")
                 
                 
+                let formatterTime = DateFormatter()
+                formatterTime.dateFormat = "HHmm"
+                let currentTimeCompare = formatterTime.string(from: Date())
+                
+                print("현재 나열되는 시간은 \(currentTimeCompare)")
+                
+                
+                
+                // MARK: - 온도 데이터를 배열에 담기 위함
+                
+                // 오늘 날짜라면
+                if currentWeather.fcstDate.contains(today) {
+                    
+                    // 상태 코드를 TMP로 골라서
+                    if currentWeather.category.rawValue == "TMP" {
+                        
+                        // 현재 시간보다 더 뒤에 있는 시간만 코드 블럭을 실행하도록 한다.
+                        if currentTimeCompare < currentWeather.fcstTime {
+                            self?.todayForecastView.temperatureArray.append(currentWeather.fcstValue)
+                        }
+                    }
+                } else { // 오늘 날짜가 아니라면
+                    
+                    // 상태 코드가 TMP로 골라서
+                    if currentWeather.category.rawValue == "TMP" {
+                        self?.todayForecastView.temperatureArray.append(currentWeather.fcstValue)
+                    }
+                }
+                
+                
+                
+                // MARK: - 날씨 데이터를 배열에 담기 위함 (추후에 날씨 이미지를 할당하는 데에 사용)
+                
+                // 오늘 날짜라면
+                if currentWeather.fcstDate.contains(today) {
+                    
+                    // 상태코드를 SKY로 골라서
+                    if currentWeather.category.rawValue == "SKY" {
+                        
+                        // 현재 시간보다 더 뒤에 있는 시간만 코드 블럭을 실행하도록 한다. (24시간 날씨 예측)
+                        if currentTimeCompare < currentWeather.fcstTime {
+                            self?.todayForecastView.weatherArray.append(currentWeather.fcstValue)
+                        }
+                    }
+                } else { // 오늘 날짜가 아니라면
+                    
+                    // 상태코드를 SKY로 골라서
+                    if currentWeather.category.rawValue == "SKY" {
+                        self?.todayForecastView.weatherArray.append(currentWeather.fcstValue)
+                    }
+                }
+                
+                
                 // 예보날짜를 오늘로 설정 (오늘의 최고 온도와 최저 온도를 파악하기 위해 만듬 ⭐️)
                 if currentWeather.fcstDate == today {
                     
@@ -348,6 +418,55 @@ class WeatherController: UIViewController {
                         if currentWeather.category.rawValue == "TMP" {
                             // 그 값을 todayWeatherCelsius 값에 할당한다.
                             self?.mainInformationView.todayWeatherCelsius.text = currentWeather.fcstValue
+                            
+                            
+                            // MARK: - 오늘 날짜의 시간과 온도를 보냄
+                            self?.todayForecastView.todayTime = currentWeather.fcstTime
+                            self?.todayForecastView.todayTemperature = currentWeather.fcstValue
+                        }
+         
+                        
+                        // SKY 코드(구름상태) 보다 PTY 코드(강수상태) 를 먼저 컴파일러가 읽게 한다.
+                        if currentWeather.category.rawValue == "PTY" {
+                            
+                            // PTY(강수상태)가 "0"이 아닐 때에만 실행하도록 함. 그렇지 않으면 이 코드는 그냥 지나간다.
+                            if currentWeather.fcstValue != "0" {
+                                let rain = "1"
+                                let rainAndSnow = "2"
+                                let snow = "3"
+                                let sonagi = "4"
+                                
+                                if currentWeather.fcstValue == rain {
+                                    self?.mainInformationView.todaySky.text = "비옴"
+                                } else if currentWeather.fcstValue == rainAndSnow {
+                                    self?.mainInformationView.todaySky.text = "비와눈"
+                                } else if currentWeather.fcstValue == snow {
+                                    self?.mainInformationView.todaySky.text = "눈옴"
+                                } else if currentWeather.fcstValue == sonagi {
+                                    self?.mainInformationView.todaySky.text = "소나기"
+                                }
+                            }
+                        }
+                        
+                        
+                        // 그 후 SKY 코드를 읽게 한다.
+                        if currentWeather.category.rawValue == "SKY" {
+
+                            // MARK: - 오늘 날짜의 날씨를 보냄
+                            self?.todayForecastView.todayWeather = currentWeather.fcstValue
+
+                            let sunny = "1"
+                            let cloudy = "3"
+                            let blur = "4"
+
+                            if currentWeather.fcstValue == sunny {
+                                self?.mainInformationView.todaySky.text = "맑음"
+                            } else if currentWeather.fcstValue == cloudy {
+                                self?.mainInformationView.todaySky.text = "구름많음"
+                            } else if currentWeather.fcstValue == blur {
+                                self?.mainInformationView.todaySky.text = "흐림"
+                            }
+
                         }
                     }
                     
@@ -379,34 +498,13 @@ class WeatherController: UIViewController {
                         self?.mainInformationView.lowestCelsius.text = "최저: " + currentWeather.fcstValue + "°"
                     }
                 }
-                
-                // 단기 예보에서 받아올 수 있는 데이터이다.
-                // 0210, 0510, 0810, 1110, 1410, 1710, 2010, 2310 시에 확인할 수 있다.
-                // 하늘상태 코드(SKY): 맑음(1), 구름많음(3), 흐림(4)
-                // 강수형태 코드(PTY): 단기예보 - 없음(0), 비(1), 비와 눈(2), 눈(3), 소나기(4)
-                if currentWeather.category.rawValue == "SKY" {
-                    let sunny = "1"
-                    let cloudy = "3"
-                    let blur = "4"
-                    
-                    if currentWeather.fcstValue == sunny {
-                        self?.mainInformationView.todaySky.text = "맑음"
-                        print("현재 날씨는 \(self?.mainInformationView.todaySky.text)입니다")
-                        
-                    } else if currentWeather.fcstValue == cloudy {
-                        self?.mainInformationView.todaySky.text = "구름많음"
-                        print("현재 날씨는 \(self?.mainInformationView.todaySky.text)입니다")
-                        
-                    } else if currentWeather.fcstValue == blur {
-                        self?.mainInformationView.todaySky.text = "흐림"
-                        print("현재 날씨는 \(self?.mainInformationView.todaySky.text)입니다")
-                    }
-                }
             }
             
             
             // MARK: - Particulate 영역 (미세먼지 농도를 파악하기 위함)
             
+            
+            // 이 영역을 메소드로 분리해서 파라미터로 넘겨주기 
             
             guard let particulateMatterData = particulate?.particulateMatterResponse.body.items else { return }
             

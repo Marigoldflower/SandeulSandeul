@@ -42,6 +42,8 @@
 		EA85D0082A2A064200073809 /* IBMPlexSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85D0002A2A064200073809 /* IBMPlexSansKR-Medium.otf */; };
 		EA85D0092A2A064200073809 /* IBMPlexSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85D0012A2A064200073809 /* IBMPlexSansKR-Regular.otf */; };
 		EA85D00A2A2A064200073809 /* IBMPlexSansKR-Text.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85D0022A2A064200073809 /* IBMPlexSansKR-Text.otf */; };
+		EAD7647F2A4D8A260091A80E /* TenDaysForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD7647E2A4D8A260091A80E /* TenDaysForecastView.swift */; };
+		EAD764812A4D8B900091A80E /* TenDaysForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD764802A4D8B900091A80E /* TenDaysForecastTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +87,9 @@
 		EA85D0002A2A064200073809 /* IBMPlexSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Medium.otf"; sourceTree = "<group>"; };
 		EA85D0012A2A064200073809 /* IBMPlexSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Regular.otf"; sourceTree = "<group>"; };
 		EA85D0022A2A064200073809 /* IBMPlexSansKR-Text.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSansKR-Text.otf"; sourceTree = "<group>"; };
+		EAD7647E2A4D8A260091A80E /* TenDaysForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenDaysForecastView.swift; sourceTree = "<group>"; };
+		EAD764802A4D8B900091A80E /* TenDaysForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenDaysForecastTableViewCell.swift; sourceTree = "<group>"; };
+		EAD764822A4D956A0091A80E /* Apple SD Gothic Neo Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Apple SD Gothic Neo Bold.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +134,7 @@
 			children = (
 				EA838FDF2A17533200B0D8FD /* MainInformationView.swift */,
 				EA838FE12A17534700B0D8FD /* TodayForecastView.swift */,
+				EAD7647E2A4D8A260091A80E /* TenDaysForecastView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -227,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				EA3212D12A331C3E00A49FD5 /* TodayForecastCell.swift */,
+				EAD764802A4D8B900091A80E /* TenDaysForecastTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -253,6 +260,7 @@
 				EA85CFFB2A2A064100073809 /* IBMPlexSansKR-SemiBold.otf */,
 				EA85D0022A2A064200073809 /* IBMPlexSansKR-Text.otf */,
 				EA85CFFF2A2A064100073809 /* IBMPlexSansKR-Thin.otf */,
+				EAD764822A4D956A0091A80E /* Apple SD Gothic Neo Bold.otf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -380,6 +388,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAD764812A4D8B900091A80E /* TenDaysForecastTableViewCell.swift in Sources */,
 				EA3212DB2A371A0B00A49FD5 /* ParticulateMatterViewModel.swift in Sources */,
 				EA838FCE2A1752A800B0D8FD /* WeatherController.swift in Sources */,
 				EA3212D22A331C3E00A49FD5 /* TodayForecastCell.swift in Sources */,
@@ -402,6 +411,7 @@
 				EA3212E52A39C6F400A49FD5 /* SunsetAndSunriseViewModel.swift in Sources */,
 				EA838FE22A17534700B0D8FD /* TodayForecastView.swift in Sources */,
 				EA838FCC2A1752A800B0D8FD /* SceneDelegate.swift in Sources */,
+				EAD7647F2A4D8A260091A80E /* TenDaysForecastView.swift in Sources */,
 				EA3212C32A305C3500A49FD5 /* GPStoGrid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

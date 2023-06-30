@@ -15,25 +15,23 @@ final class MainInformationView: UIView {
     
     lazy var todayWeatherIs: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "IBMPlexSansKR-Medium", size: 25)
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 25)
         return label
     }()
     
     let todaySky: UILabel = {
         let label = UILabel()
         label.text = "--"
-        label.font = UIFont(name: "IBMPlexSansKR-Medium", size: 25)
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 25)
         return label
     }()
-    
-    
     
     
     // MARK: - 현재 온도
     
     let todayWeatherCelsius: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "IBMPlexSansKR", size: 60)
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 60)
         label.text = "--"
         return label
     }()
@@ -41,7 +39,7 @@ final class MainInformationView: UIView {
     
     let celsiusLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "IBMPlexSansKR", size: 60)
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 60)
         label.text = "°"
         return label
     }()
@@ -52,7 +50,7 @@ final class MainInformationView: UIView {
     
     lazy var highestCelsius: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "IBMPlexSansKR", size: 18)
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
         label.text = "최고: --"
         return label
     }()
@@ -60,7 +58,7 @@ final class MainInformationView: UIView {
     
     lazy var lowestCelsius: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "IBMPlexSansKR", size: 18)
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
         label.text = "최저: --"
         return label
     }()
@@ -71,6 +69,7 @@ final class MainInformationView: UIView {
     
     let particulateMatter: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
         label.text = "미세: --"
         return label
     }()
@@ -79,6 +78,7 @@ final class MainInformationView: UIView {
     
     let ultraParticulateMatter: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
         label.text = "초미세: --"
         return label
     }()
@@ -89,6 +89,7 @@ final class MainInformationView: UIView {
     
     let sunrise: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
         label.text = "일출: --"
         return label
     }()
@@ -96,6 +97,7 @@ final class MainInformationView: UIView {
     
     let sunset: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
         label.text = "일몰: --"
         return label
     }()
@@ -172,23 +174,23 @@ final class MainInformationView: UIView {
     func setupLayout() {
         
         todayIs.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top)
+            make.top.equalTo(self.snp.top).offset(10)
             make.centerX.equalTo(self.snp.centerX)
         }
         
         totalTodayWeatherCelsisus.snp.makeConstraints { make in
-            make.top.equalTo(todayIs.snp.bottom).offset(-8)
+            make.top.equalTo(todayIs.snp.bottom).offset(5)
             make.centerX.equalTo(self.snp.centerX)
         }
 
         highLowCelciusStackView.snp.makeConstraints { make in
-            make.top.equalTo(todayWeatherCelsius.snp.bottom).offset(-8)
+            make.top.equalTo(todayWeatherCelsius.snp.bottom).offset(5)
             make.centerX.equalTo(self.snp.centerX)
         }
         
         
         particulateMatterStackView.snp.makeConstraints { make in
-            make.top.equalTo(highLowCelciusStackView.snp.bottom).offset(2)
+            make.top.equalTo(highLowCelciusStackView.snp.bottom).offset(5)
             make.centerX.equalTo(self.snp.centerX)
         }
         
