@@ -64,3 +64,47 @@ var chungbuk: String { "충청북도" }
 var gyeongnam: String { "경상남도" }
 var gyeonggi: String { "경기도" }
 
+
+
+
+// MARK: - 미세먼지 농도를 측정하기 위해 필요한 지역 이름을 담은 메소드
+
+func searchLocation(location: String) -> String{
+    switch location {
+    case daegu:
+        return "daegu"
+    case chungnam:
+        return "chungnam"
+    case incheon:
+        return "incheon"
+    case daejeon:
+        return "daejeon"
+    case gyeongbuk:
+        return "gyeongbuk"
+    case sejong:
+        return "sejong"
+    case gwangju:
+        return "gwangju"
+    case jeonbuk:
+        return "jeonbuk"
+    case gangwon:
+        return "gangwon"
+    case ulsan:
+        return "ulsan"
+    case jeonnam:
+        return "jeonnam"
+    case seoul:
+        return "seoul"
+    case busan:
+        return "busan"
+    case jeju:
+        return "jeju"
+    case chungbuk:
+        return "chungbuk"
+    case gyeongnam:
+        return "gyeongnam"
+    case gyeonggi:
+        return "gyeonggi"
+    default: return ""
+    }
+}

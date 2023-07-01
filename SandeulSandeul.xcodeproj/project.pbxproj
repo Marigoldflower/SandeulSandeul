@@ -10,10 +10,10 @@
 		DE6B7B4699ED7B2AA32A0142 /* Pods_SandeulSandeul.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5BA1432BEAB6B70C7943A57 /* Pods_SandeulSandeul.framework */; };
 		EA3212912A2E072100A49FD5 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212902A2E072100A49FD5 /* Location.swift */; };
 		EA3212932A2E126100A49FD5 /* QueryParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212922A2E126100A49FD5 /* QueryParameter.swift */; };
-		EA3212952A2E15C900A49FD5 /* ForecastWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212942A2E15C900A49FD5 /* ForecastWeather.swift */; };
+		EA3212952A2E15C900A49FD5 /* ShortTermForecastWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212942A2E15C900A49FD5 /* ShortTermForecastWeather.swift */; };
 		EA3212C32A305C3500A49FD5 /* GPStoGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212C22A305C3500A49FD5 /* GPStoGrid.swift */; };
-		EA3212C52A309F9700A49FD5 /* ForecastWeatherNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212C42A309F9700A49FD5 /* ForecastWeatherNetworkManager.swift */; };
-		EA3212C72A30A10E00A49FD5 /* ForecastWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212C62A30A10E00A49FD5 /* ForecastWeatherViewModel.swift */; };
+		EA3212C52A309F9700A49FD5 /* ShortTermForecastWeatherNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212C42A309F9700A49FD5 /* ShortTermForecastWeatherNetworkManager.swift */; };
+		EA3212C72A30A10E00A49FD5 /* ShortTermForecastWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212C62A30A10E00A49FD5 /* ShortTermForecastWeatherViewModel.swift */; };
 		EA3212C92A31D8E700A49FD5 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212C82A31D8E700A49FD5 /* UserDefaults.swift */; };
 		EA3212D22A331C3E00A49FD5 /* TodayForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212D12A331C3E00A49FD5 /* TodayForecastCell.swift */; };
 		EA3212D72A37179400A49FD5 /* ParticulateMatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212D62A37179400A49FD5 /* ParticulateMatter.swift */; };
@@ -22,9 +22,6 @@
 		EA3212E12A39C61500A49FD5 /* SunsetAndSunrise.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212E02A39C61500A49FD5 /* SunsetAndSunrise.swift */; };
 		EA3212E32A39C65D00A49FD5 /* SunsetAndSunriseNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212E22A39C65D00A49FD5 /* SunsetAndSunriseNetworkManager.swift */; };
 		EA3212E52A39C6F400A49FD5 /* SunsetAndSunriseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212E42A39C6F400A49FD5 /* SunsetAndSunriseViewModel.swift */; };
-		EA3212F52A495EC600A49FD5 /* ThreeDaysForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212F42A495EC600A49FD5 /* ThreeDaysForecast.swift */; };
-		EA3212F72A495EE300A49FD5 /* ThreeDaysForecastNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212F62A495EE300A49FD5 /* ThreeDaysForecastNetworkManager.swift */; };
-		EA3212F92A495FF400A49FD5 /* ThreeDaysForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3212F82A495FF400A49FD5 /* ThreeDaysForecastViewModel.swift */; };
 		EA838FCA2A1752A800B0D8FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA838FC92A1752A800B0D8FD /* AppDelegate.swift */; };
 		EA838FCC2A1752A800B0D8FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA838FCB2A1752A800B0D8FD /* SceneDelegate.swift */; };
 		EA838FCE2A1752A800B0D8FD /* WeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA838FCD2A1752A800B0D8FD /* WeatherController.swift */; };
@@ -44,6 +41,9 @@
 		EA85D00A2A2A064200073809 /* IBMPlexSansKR-Text.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA85D0022A2A064200073809 /* IBMPlexSansKR-Text.otf */; };
 		EAD7647F2A4D8A260091A80E /* TenDaysForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD7647E2A4D8A260091A80E /* TenDaysForecastView.swift */; };
 		EAD764812A4D8B900091A80E /* TenDaysForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD764802A4D8B900091A80E /* TenDaysForecastTableViewCell.swift */; };
+		EAD764842A4E66090091A80E /* LongTermForecastWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD764832A4E66090091A80E /* LongTermForecastWeather.swift */; };
+		EAD764862A4E662A0091A80E /* LongTermForecastWeatherNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD764852A4E662A0091A80E /* LongTermForecastWeatherNetworkManager.swift */; };
+		EAD764882A4E67280091A80E /* LongTermForecastWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD764872A4E67280091A80E /* LongTermForecastWeatherViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,10 +52,10 @@
 		CE15352017E7FB5D40774363 /* Pods-SandeulSandeul.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SandeulSandeul.release.xcconfig"; path = "Target Support Files/Pods-SandeulSandeul/Pods-SandeulSandeul.release.xcconfig"; sourceTree = "<group>"; };
 		EA3212902A2E072100A49FD5 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		EA3212922A2E126100A49FD5 /* QueryParameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryParameter.swift; sourceTree = "<group>"; };
-		EA3212942A2E15C900A49FD5 /* ForecastWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastWeather.swift; sourceTree = "<group>"; };
+		EA3212942A2E15C900A49FD5 /* ShortTermForecastWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortTermForecastWeather.swift; sourceTree = "<group>"; };
 		EA3212C22A305C3500A49FD5 /* GPStoGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPStoGrid.swift; sourceTree = "<group>"; };
-		EA3212C42A309F9700A49FD5 /* ForecastWeatherNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastWeatherNetworkManager.swift; sourceTree = "<group>"; };
-		EA3212C62A30A10E00A49FD5 /* ForecastWeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastWeatherViewModel.swift; sourceTree = "<group>"; };
+		EA3212C42A309F9700A49FD5 /* ShortTermForecastWeatherNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortTermForecastWeatherNetworkManager.swift; sourceTree = "<group>"; };
+		EA3212C62A30A10E00A49FD5 /* ShortTermForecastWeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortTermForecastWeatherViewModel.swift; sourceTree = "<group>"; };
 		EA3212C82A31D8E700A49FD5 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		EA3212CA2A31E32100A49FD5 /* SandeulSandeul.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SandeulSandeul.entitlements; sourceTree = "<group>"; };
 		EA3212D12A331C3E00A49FD5 /* TodayForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayForecastCell.swift; sourceTree = "<group>"; };
@@ -65,9 +65,6 @@
 		EA3212E02A39C61500A49FD5 /* SunsetAndSunrise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunsetAndSunrise.swift; sourceTree = "<group>"; };
 		EA3212E22A39C65D00A49FD5 /* SunsetAndSunriseNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunsetAndSunriseNetworkManager.swift; sourceTree = "<group>"; };
 		EA3212E42A39C6F400A49FD5 /* SunsetAndSunriseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunsetAndSunriseViewModel.swift; sourceTree = "<group>"; };
-		EA3212F42A495EC600A49FD5 /* ThreeDaysForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDaysForecast.swift; sourceTree = "<group>"; };
-		EA3212F62A495EE300A49FD5 /* ThreeDaysForecastNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDaysForecastNetworkManager.swift; sourceTree = "<group>"; };
-		EA3212F82A495FF400A49FD5 /* ThreeDaysForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDaysForecastViewModel.swift; sourceTree = "<group>"; };
 		EA838FC62A1752A800B0D8FD /* SandeulSandeul.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SandeulSandeul.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA838FC92A1752A800B0D8FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA838FCB2A1752A800B0D8FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +87,9 @@
 		EAD7647E2A4D8A260091A80E /* TenDaysForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenDaysForecastView.swift; sourceTree = "<group>"; };
 		EAD764802A4D8B900091A80E /* TenDaysForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TenDaysForecastTableViewCell.swift; sourceTree = "<group>"; };
 		EAD764822A4D956A0091A80E /* Apple SD Gothic Neo Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Apple SD Gothic Neo Bold.otf"; sourceTree = "<group>"; };
+		EAD764832A4E66090091A80E /* LongTermForecastWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongTermForecastWeather.swift; sourceTree = "<group>"; };
+		EAD764852A4E662A0091A80E /* LongTermForecastWeatherNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongTermForecastWeatherNetworkManager.swift; sourceTree = "<group>"; };
+		EAD764872A4E67280091A80E /* LongTermForecastWeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongTermForecastWeatherViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,8 +199,8 @@
 		EA838FE32A175E3200B0D8FD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				EA3212F42A495EC600A49FD5 /* ThreeDaysForecast.swift */,
-				EA3212942A2E15C900A49FD5 /* ForecastWeather.swift */,
+				EA3212942A2E15C900A49FD5 /* ShortTermForecastWeather.swift */,
+				EAD764832A4E66090091A80E /* LongTermForecastWeather.swift */,
 				EA3212D62A37179400A49FD5 /* ParticulateMatter.swift */,
 				EA3212E02A39C61500A49FD5 /* SunsetAndSunrise.swift */,
 			);
@@ -210,8 +210,8 @@
 		EA838FE82A17652D00B0D8FD /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				EA3212F62A495EE300A49FD5 /* ThreeDaysForecastNetworkManager.swift */,
-				EA3212C42A309F9700A49FD5 /* ForecastWeatherNetworkManager.swift */,
+				EA3212C42A309F9700A49FD5 /* ShortTermForecastWeatherNetworkManager.swift */,
+				EAD764852A4E662A0091A80E /* LongTermForecastWeatherNetworkManager.swift */,
 				EA3212D82A37188200A49FD5 /* ParticulateMatterNetworkManager.swift */,
 				EA3212E22A39C65D00A49FD5 /* SunsetAndSunriseNetworkManager.swift */,
 			);
@@ -221,8 +221,8 @@
 		EA85CFEC2A29BABF00073809 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				EA3212F82A495FF400A49FD5 /* ThreeDaysForecastViewModel.swift */,
-				EA3212C62A30A10E00A49FD5 /* ForecastWeatherViewModel.swift */,
+				EA3212C62A30A10E00A49FD5 /* ShortTermForecastWeatherViewModel.swift */,
+				EAD764872A4E67280091A80E /* LongTermForecastWeatherViewModel.swift */,
 				EA3212DA2A371A0B00A49FD5 /* ParticulateMatterViewModel.swift */,
 				EA3212E42A39C6F400A49FD5 /* SunsetAndSunriseViewModel.swift */,
 			);
@@ -390,24 +390,24 @@
 			files = (
 				EAD764812A4D8B900091A80E /* TenDaysForecastTableViewCell.swift in Sources */,
 				EA3212DB2A371A0B00A49FD5 /* ParticulateMatterViewModel.swift in Sources */,
+				EAD764862A4E662A0091A80E /* LongTermForecastWeatherNetworkManager.swift in Sources */,
 				EA838FCE2A1752A800B0D8FD /* WeatherController.swift in Sources */,
+				EAD764882A4E67280091A80E /* LongTermForecastWeatherViewModel.swift in Sources */,
 				EA3212D22A331C3E00A49FD5 /* TodayForecastCell.swift in Sources */,
 				EA3212912A2E072100A49FD5 /* Location.swift in Sources */,
-				EA3212952A2E15C900A49FD5 /* ForecastWeather.swift in Sources */,
-				EA3212F72A495EE300A49FD5 /* ThreeDaysForecastNetworkManager.swift in Sources */,
-				EA3212F92A495FF400A49FD5 /* ThreeDaysForecastViewModel.swift in Sources */,
+				EA3212952A2E15C900A49FD5 /* ShortTermForecastWeather.swift in Sources */,
 				EA3212D72A37179400A49FD5 /* ParticulateMatter.swift in Sources */,
 				EA3212C92A31D8E700A49FD5 /* UserDefaults.swift in Sources */,
 				EA3212E12A39C61500A49FD5 /* SunsetAndSunrise.swift in Sources */,
-				EA3212C72A30A10E00A49FD5 /* ForecastWeatherViewModel.swift in Sources */,
+				EA3212C72A30A10E00A49FD5 /* ShortTermForecastWeatherViewModel.swift in Sources */,
 				EA838FCA2A1752A800B0D8FD /* AppDelegate.swift in Sources */,
 				EA838FE02A17533200B0D8FD /* MainInformationView.swift in Sources */,
 				EA3212E32A39C65D00A49FD5 /* SunsetAndSunriseNetworkManager.swift in Sources */,
 				EA3212D92A37188200A49FD5 /* ParticulateMatterNetworkManager.swift in Sources */,
-				EA3212C52A309F9700A49FD5 /* ForecastWeatherNetworkManager.swift in Sources */,
+				EAD764842A4E66090091A80E /* LongTermForecastWeather.swift in Sources */,
+				EA3212C52A309F9700A49FD5 /* ShortTermForecastWeatherNetworkManager.swift in Sources */,
 				EA85CFF02A29CB5900073809 /* MyColor.swift in Sources */,
 				EA3212932A2E126100A49FD5 /* QueryParameter.swift in Sources */,
-				EA3212F52A495EC600A49FD5 /* ThreeDaysForecast.swift in Sources */,
 				EA3212E52A39C6F400A49FD5 /* SunsetAndSunriseViewModel.swift in Sources */,
 				EA838FE22A17534700B0D8FD /* TodayForecastView.swift in Sources */,
 				EA838FCC2A1752A800B0D8FD /* SceneDelegate.swift in Sources */,

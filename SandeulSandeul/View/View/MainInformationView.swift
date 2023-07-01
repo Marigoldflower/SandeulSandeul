@@ -83,7 +83,17 @@ final class MainInformationView: UIView {
         return label
     }()
     
-    
+//    var particulateMatterStore = "" {
+//        didSet {
+//            print("미세먼지 값이 들어왔습니다 \(particulateMatterStore)")
+//        }
+//    }
+//    
+//    var ultraParticulateMatterStore = "" {
+//        didSet {
+//            print("초미세먼지 값이 들어왔습니다 \(ultraParticulateMatterStore)")
+//        }
+//    }
     
     // MARK: - 일출, 일몰 시간
     

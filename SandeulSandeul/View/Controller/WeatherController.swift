@@ -68,10 +68,12 @@ class WeatherController: UIViewController {
     let locationManager = CLLocationManager()
     
     
+    
     // MARK: - ViewModel
     
-    let threeDaysViewModel = ThreeDaysForecastViewModel()
-    let forecastWeatherViewModel = ForecastWeatherViewModel()
+    
+    let shortTermForecastWeatherViewModel = ShortTermForecastWeatherViewModel()
+    let longTermForecastWeatherViewModel = LongTermForecastWeatherViewModel()
     let particulateMatterViewModel = ParticulateMatterViewModel()
     let sunsetAndSunriseViewModel = SunsetAndSunriseViewModel()
     
@@ -82,8 +84,9 @@ class WeatherController: UIViewController {
     
     // MARK: - ViewModel Publisher
     
-    lazy var threeDaysPublisher = threeDaysViewModel.$threeDaysPublisher
-    lazy var forecastWeatherPublisher = forecastWeatherViewModel.$forecastWeatherPublisher
+    
+    lazy var shortTermForecastWeatherPublisher = shortTermForecastWeatherViewModel.$shortTermForecastPublisher
+    lazy var longTermForecastWeatherPublisher = longTermForecastWeatherViewModel.$longtermForecastPublisher
     lazy var particulateMatterPublisher = particulateMatterViewModel.$particulateMatterPublisher
     lazy var sunsetAndSunrisePublisher = sunsetAndSunriseViewModel.$sunsetAndSunrisePublisher
     
@@ -118,15 +121,11 @@ class WeatherController: UIViewController {
             let currentTime = currentTimeformatter.string(from: Date())
             
             // "오전 2시"를 기점으로 3일 간의 예측 데이터를 가져옴 (구름 상태, 최고 온도 & 최저 온도)
-            fetchForecastNetwork(x: latLong.x, y: latLong.y, baseTime: "0200")
+            fetchShortTermForecastNetwork(x: latLong.x, y: latLong.y, baseTime: "0200")
             
             
             let latitudeString = String(latitude)
             let longtitudeString = String(longitude)
-            
-            
-            // 3일 간의 온도 데이터를 가져옴 
-            fetchThreeDaysForecastNetwork(latitude: latitudeString, longtitude: longtitudeString)
             
             
             // 일출, 일몰을 네트워크를 통해 받아옴
@@ -138,7 +137,7 @@ class WeatherController: UIViewController {
     }
     
     
-    // 1) CLLocation을 통해 사용자가 존재하는 위치를 먼저 알아낸 뒤
+    // 현재 위치를 알아내기 위해 필요한 변수
     var myCityLocation = "" {
         didSet {
             print("myCityLocation에 값이 담겼습니다! \(myCityLocation)")
@@ -147,52 +146,29 @@ class WeatherController: UIViewController {
     }
     
     
+    // 미세먼지 농도를 알아내야 할 때 필요한 변수
     var myStateLocation = "" {
         didSet {
             print("myStateLocation에 값이 담겼습니다! \(myStateLocation)")
-            switch myStateLocation {
-            case daegu:
-                myStateLocation = "daegu"
-            case chungnam:
-                myStateLocation = "chungnam"
-            case incheon:
-                myStateLocation = "incheon"
-            case daejeon:
-                myStateLocation = "daejeon"
-            case gyeongbuk:
-                myStateLocation = "gyeongbuk"
-            case sejong:
-                myStateLocation = "sejong"
-            case gwangju:
-                myStateLocation = "gwangju"
-            case jeonbuk:
-                myStateLocation = "jeonbuk"
-            case gangwon:
-                myStateLocation = "gangwon"
-            case ulsan:
-                myStateLocation = "ulsan"
-            case jeonnam:
-                myStateLocation = "jeonnam"
-            case seoul:
-                myStateLocation = "seoul"
-            case busan:
-                myStateLocation = "busan"
-            case jeju:
-                myStateLocation = "jeju"
-            case chungbuk:
-                myStateLocation = "chungbuk"
-            case gyeongnam:
-                myStateLocation = "gyeongnam"
-            case gyeonggi:
-                myStateLocation = "gyeonggi"
-            default: return
-            }
             
+            particulateMatterData = searchLocation(location: myStateLocation)
+            ultraParticulateMatterData = searchLocation(location: myStateLocation)
+            
+        }
+    }
+    
+    
+    var particulateMatterData = "" {
+        didSet {
             fetchParticulateMatterNetwork(density: "PM10")
-            fetchParticulateMatterNetwork(density: "PM25")
-
             collectAllFetchData()
-            
+        }
+    }
+    
+    var ultraParticulateMatterData = "" {
+        didSet {
+            fetchParticulateMatterNetwork(density: "PM25")
+            collectAllFetchData()
         }
     }
     
@@ -207,14 +183,6 @@ class WeatherController: UIViewController {
         setupLayout()
         fillStackView()
         setupLocation()
-        
-        for family in UIFont.familyNames {
-            print(family)
-
-            for sub in UIFont.fontNames(forFamilyName: family) {
-                 print("====> \(sub)")
-            }
-        }
         
     }
     
@@ -291,53 +259,18 @@ class WeatherController: UIViewController {
     // Zip을 사용하면 데이터를 튜플 형태로 받아서 처리할 수 있다.
     // MergeMany는 튜플 형태는 아니고 각각 다른 Publisher 타입의 sink를 사용할 수 있다.
     func collectAllFetchData() {
-        Publishers.Zip4(threeDaysPublisher, forecastWeatherPublisher, particulateMatterPublisher, sunsetAndSunrisePublisher).receive(on: DispatchQueue.main).sink { completion in
+        Publishers.Zip3(shortTermForecastWeatherPublisher, particulateMatterPublisher, sunsetAndSunrisePublisher).receive(on: DispatchQueue.main).sink { completion in
             switch completion {
             case .finished:
                 print("모든 데이터가 잘 들어왔습니다")
             }
-        } receiveValue: { [weak self] threeDays ,forecast, particulate, sunset in // self의 RC값을 올리지 않음
-            
-            
-            let yearFormatter = DateFormatter()
-            yearFormatter.dateFormat = "yyyy-MM-dd"
-            let today = yearFormatter.string(from: Date())
-            print("현재 날짜는 \(today)")
-            
-            let timeFormatter = DateFormatter()
-            timeFormatter.dateFormat = "HH"
-            let currentTime = timeFormatter.string(from: Date())
-            print("현재 시간은 \(currentTime)")
-            
-            
-            // MARK: - ThreeDays 영역 (3일간의 모든 날씨를 가져오기 위한 영역)
-            
-            guard let threeDays = threeDays?.forecast.forecastday else { return }
-            
-            for data in threeDays {
-                for i in data.hour {
-                    guard let forecastTime = i.forecastTimeFormatter else { return }
-                    
-                    
-                    print("현재 들어오는 시간은 \(i.time)")
-                    
-                    if i.time.contains(today) {
-                        print("현재 날짜에 포함되는 값은 \(i.time)")
-                        
-                        if currentTime < forecastTime {
-                            self?.todayForecastView.timeArray.append(forecastTime)
-                        }
-                        
-                    } else {
-                        self?.todayForecastView.timeArray.append(forecastTime)
-                    }
-                }
-            }
+        } receiveValue: { [weak self] shortTerm, particulate, sunset in // self의 RC값을 올리지 않음
+           
             
        
-            // MARK: - Forecast 영역 (3일간의 모든 날씨 데이털
+            // MARK: - Forecast 영역 (3일간의 모든 날씨 데이터를 가져오기 위한 영역)
             
-            guard let weatherData = forecast?.forecastResponse.forecastBody.forecastItems.forecastItem else { return }
+            guard let weatherData = shortTerm?.forecastResponse.forecastBody.forecastItems.forecastItem else { return }
             
             
             // 단기 예보를 이용해 3일간 최고 기온과 최저 기온을 따옴
@@ -350,24 +283,26 @@ class WeatherController: UIViewController {
                 let today = dateFormatter.string(from: Date())
                 print("현재 날짜는 \(today)")
                 
-                let timeFormatter = DateFormatter()
-                timeFormatter.dateFormat = "HH"
-                let currentTime = timeFormatter.string(from: Date())
-                print("현재 시간은 \(currentTime)")
-                
-                
                 let formatterTime = DateFormatter()
                 formatterTime.dateFormat = "HHmm"
                 let currentTimeCompare = formatterTime.string(from: Date())
                 
-                print("현재 나열되는 시간은 \(currentTimeCompare)")
+                
+                let newFormatter = DateFormatter()
+                newFormatter.dateFormat = "HHmm "
+                let dateToString = newFormatter.date(from: currentWeather.fcstTime)
                 
                 
+                let formatter = DateFormatter()
+                formatter.dateFormat = "HH"
+                let date = formatter.string(from: dateToString ?? Date())
+                print("현재 변환된 날짜는 \(date)")
                 
                 // MARK: - 온도 데이터를 배열에 담기 위함
                 
                 // 오늘 날짜라면
                 if currentWeather.fcstDate.contains(today) {
+                    
                     
                     // 상태 코드를 TMP로 골라서
                     if currentWeather.category.rawValue == "TMP" {
@@ -375,13 +310,17 @@ class WeatherController: UIViewController {
                         // 현재 시간보다 더 뒤에 있는 시간만 코드 블럭을 실행하도록 한다.
                         if currentTimeCompare < currentWeather.fcstTime {
                             self?.todayForecastView.temperatureArray.append(currentWeather.fcstValue)
+                            self?.todayForecastView.timeArray.append(date)
                         }
                     }
+                    
+                    
                 } else { // 오늘 날짜가 아니라면
                     
                     // 상태 코드가 TMP로 골라서
                     if currentWeather.category.rawValue == "TMP" {
                         self?.todayForecastView.temperatureArray.append(currentWeather.fcstValue)
+                        self?.todayForecastView.timeArray.append(date)
                     }
                 }
                 
@@ -409,8 +348,14 @@ class WeatherController: UIViewController {
                 }
                 
                 
+                
                 // 예보날짜를 오늘로 설정 (오늘의 최고 온도와 최저 온도를 파악하기 위해 만듬 ⭐️)
                 if currentWeather.fcstDate == today {
+                    
+                    let timeFormatter = DateFormatter()
+                    timeFormatter.dateFormat = "HH"
+                    let currentTime = timeFormatter.string(from: Date())
+                    print("현재 시간은 \(currentTime)")
                     
                     // 현재 시간이 currentTime의 HH 값을 포함하고 있다면
                     if currentWeather.fcstTime.contains(currentTime) {
@@ -511,7 +456,9 @@ class WeatherController: UIViewController {
             // 미세먼지 농도
             // ~30: 좋음  ~80: 보통  ~150: 나쁨  151~: 매우나쁨
             
-            switch self?.myStateLocation {
+            
+            print("현재 미세먼지의 값은 \(self?.particulateMatterData)")
+            switch self?.particulateMatterData {
                 
             case "daegu":
                 self?.distributeParticulateMatter(location: particulateMatterData[0].daegu)
@@ -551,8 +498,9 @@ class WeatherController: UIViewController {
                 
             }
             
-            
-            switch self?.myStateLocation {
+            print("현재 초미세먼지의 값은 \(self?.ultraParticulateMatterData)")
+            switch self?.ultraParticulateMatterData {
+                
                 
             case "daegu":
                 self?.distributeUltraParticulateMatter(location: particulateMatterData[0].daegu)
@@ -588,6 +536,7 @@ class WeatherController: UIViewController {
                 self?.distributeUltraParticulateMatter(location: particulateMatterData[0].gyeongnam)
             case "gyeonggi":
                 self?.distributeUltraParticulateMatter(location: particulateMatterData[0].gyeonggi)
+                print("지금 이 초미세먼지 메소드가 실행된 게 맞아?")
             default: return
                 
             }
@@ -631,8 +580,12 @@ class WeatherController: UIViewController {
     // MARK: - Fetch Network
     
     
-    func fetchForecastNetwork(x: Int, y: Int, baseTime: String) {
-        forecastWeatherViewModel.fetchWeatherNetwork(x: x, y: y, baseTime: baseTime)
+    func fetchShortTermForecastNetwork(x: Int, y: Int, baseTime: String) {
+        shortTermForecastWeatherViewModel.fetchWeatherNetwork(x: x, y: y, baseTime: baseTime)
+    }
+    
+    func fetchLongTermForecastNetwork(regionID: String) {
+        longTermForecastWeatherViewModel.fetchWeatherNetwork(regionID: regionID)
     }
     
     
@@ -646,24 +599,25 @@ class WeatherController: UIViewController {
     }
     
     
-    func fetchThreeDaysForecastNetwork(latitude: String, longtitude: String) {
-        threeDaysViewModel.fetchWeatherNetwork(latitude: latitude, longtitude: longtitude)
-    }
-    
     
     // MARK: - 미세먼지 농도에 따라 좋음, 보통, 나쁨, 매우나쁨으로 나누는 메소드
     
     func distributeParticulateMatter(location: String) {
         guard let myCurrentLocation = Int(location) else { return }
+        print("미세먼지의 값은 \(myCurrentLocation)") // 미세먼지와 초미세먼지 값이 똑같은 값이 들어오고 있는 게 문제
         switch myCurrentLocation {
         case ...30:
             self.mainInformationView.particulateMatter.text = "미세: 좋음"
+//            self.mainInformationView.particulateMatterStore = "미세: 좋음"
         case 31...80:
             self.mainInformationView.particulateMatter.text = "미세: 보통"
+//            self.mainInformationView.particulateMatterStore = "미세: 보통"
         case 81...150:
             self.mainInformationView.particulateMatter.text = "미세: 나쁨"
+//            self.mainInformationView.particulateMatterStore = "미세: 나쁨"
         case 151...:
             self.mainInformationView.particulateMatter.text = "미세: 매우나쁨"
+//            self.mainInformationView.particulateMatterStore = "미세: 매우나쁨"
         default: return
         }
     }
@@ -671,15 +625,20 @@ class WeatherController: UIViewController {
     
     func distributeUltraParticulateMatter(location: String) {
         guard let myCurrentLocation = Int(location) else { return }
+        print("초미세먼지의 값은 \(myCurrentLocation)")
         switch myCurrentLocation {
         case ...15:
             self.mainInformationView.ultraParticulateMatter.text = "초미세: 좋음"
+//            self.mainInformationView.ultraParticulateMatterStore = "초미세: 좋음"
         case 16...35:
             self.mainInformationView.ultraParticulateMatter.text = "초미세: 보통"
+//            self.mainInformationView.ultraParticulateMatterStore = "초미세: 보통"
         case 36...75:
             self.mainInformationView.ultraParticulateMatter.text = "초미세: 나쁨"
+//            self.mainInformationView.ultraParticulateMatterStore = "초미세: 나쁨"
         case 76...:
             self.mainInformationView.ultraParticulateMatter.text = "초미세: 매우나쁨"
+//            self.mainInformationView.ultraParticulateMatterStore = "초미세: 매우나쁨"
         default: return
         }
     }

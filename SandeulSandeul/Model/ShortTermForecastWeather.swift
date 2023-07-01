@@ -9,7 +9,7 @@ import Foundation
 
 
 // MARK: - ForecastWeather
-struct ForecastWeather: Codable {
+struct ShortTermForecastWeather: Codable {
     let forecastResponse: ForecastResponse
     
     enum CodingKeys: String, CodingKey {
@@ -53,6 +53,7 @@ struct ForecastItem: Codable {
     let category: Category
     let fcstDate, fcstTime, fcstValue: String
     let nx, ny: Int
+    
 }
 
 enum Category: String, Codable {
