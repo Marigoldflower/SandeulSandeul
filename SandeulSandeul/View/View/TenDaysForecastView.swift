@@ -17,6 +17,18 @@ class TenDaysForecastView: UIView {
     }()
     
     
+    
+    // MARK: - 요일 데이터
+    
+    var weekday = "" {
+        didSet {
+            print("현재 들어온 요일 값은 \(weekday)입니다")
+        }
+    }
+    
+    
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(tableView)

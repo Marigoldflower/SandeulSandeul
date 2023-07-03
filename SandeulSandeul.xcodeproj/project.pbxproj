@@ -44,6 +44,7 @@
 		EAD764842A4E66090091A80E /* LongTermForecastWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD764832A4E66090091A80E /* LongTermForecastWeather.swift */; };
 		EAD764862A4E662A0091A80E /* LongTermForecastWeatherNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD764852A4E662A0091A80E /* LongTermForecastWeatherNetworkManager.swift */; };
 		EAD764882A4E67280091A80E /* LongTermForecastWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD764872A4E67280091A80E /* LongTermForecastWeatherViewModel.swift */; };
+		EAD764B02A502D8F0091A80E /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD764AF2A502D8F0091A80E /* Weekday.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,8 @@
 		EAD764832A4E66090091A80E /* LongTermForecastWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongTermForecastWeather.swift; sourceTree = "<group>"; };
 		EAD764852A4E662A0091A80E /* LongTermForecastWeatherNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongTermForecastWeatherNetworkManager.swift; sourceTree = "<group>"; };
 		EAD764872A4E67280091A80E /* LongTermForecastWeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LongTermForecastWeatherViewModel.swift; sourceTree = "<group>"; };
+		EAD764AF2A502D8F0091A80E /* Weekday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
+		EAD764B12A5107940091A80E /* 중기예보_중기기온예보구역코드.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "중기예보_중기기온예보구역코드.xlsx"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,8 +246,10 @@
 			children = (
 				EA85CFEF2A29CB5900073809 /* MyColor.swift */,
 				EA3212902A2E072100A49FD5 /* Location.swift */,
+				EAD764AF2A502D8F0091A80E /* Weekday.swift */,
 				EA3212922A2E126100A49FD5 /* QueryParameter.swift */,
 				EA3212C82A31D8E700A49FD5 /* UserDefaults.swift */,
+				EAD764B12A5107940091A80E /* 중기예보_중기기온예보구역코드.xlsx */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -396,6 +401,7 @@
 				EA3212D22A331C3E00A49FD5 /* TodayForecastCell.swift in Sources */,
 				EA3212912A2E072100A49FD5 /* Location.swift in Sources */,
 				EA3212952A2E15C900A49FD5 /* ShortTermForecastWeather.swift in Sources */,
+				EAD764B02A502D8F0091A80E /* Weekday.swift in Sources */,
 				EA3212D72A37179400A49FD5 /* ParticulateMatter.swift in Sources */,
 				EA3212C92A31D8E700A49FD5 /* UserDefaults.swift in Sources */,
 				EA3212E12A39C61500A49FD5 /* SunsetAndSunrise.swift in Sources */,

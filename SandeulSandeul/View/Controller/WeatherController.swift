@@ -11,7 +11,6 @@ import SnapKit
 import Combine
 
 
-
 class WeatherController: UIViewController {
     
     
@@ -131,7 +130,7 @@ class WeatherController: UIViewController {
             // 일출, 일몰을 네트워크를 통해 받아옴
             fetchSunsetAndSunriseNetwork(latitude: latitudeString, longtitude: longtitudeString)
             
-            collectAllFetchData()
+            collectAllFetchDataInThreeDays()
             
         }
     }
@@ -142,6 +141,11 @@ class WeatherController: UIViewController {
         didSet {
             print("myCityLocation에 값이 담겼습니다! \(myCityLocation)")
             mainInformationView.todayWeatherIs.text = "현재 \(myCityLocation)는"
+            
+            var cityCode = searchRegionCode(location: myCityLocation)
+            print("지금 현재 도시의 CityCode는 \(cityCode)")
+            
+            
         }
     }
     
@@ -161,14 +165,14 @@ class WeatherController: UIViewController {
     var particulateMatterData = "" {
         didSet {
             fetchParticulateMatterNetwork(density: "PM10")
-            collectAllFetchData()
+            collectAllFetchDataInThreeDays()
         }
     }
     
     var ultraParticulateMatterData = "" {
         didSet {
             fetchParticulateMatterNetwork(density: "PM25")
-            collectAllFetchData()
+            collectAllFetchDataInThreeDays()
         }
     }
     
@@ -183,7 +187,7 @@ class WeatherController: UIViewController {
         setupLayout()
         fillStackView()
         setupLocation()
-        
+        collectAllFetchDataInTenDays()
     }
     
     
@@ -258,7 +262,7 @@ class WeatherController: UIViewController {
     // 일단 Zip을 사용하니까 동시에 데이터가 들어오기는 한다.
     // Zip을 사용하면 데이터를 튜플 형태로 받아서 처리할 수 있다.
     // MergeMany는 튜플 형태는 아니고 각각 다른 Publisher 타입의 sink를 사용할 수 있다.
-    func collectAllFetchData() {
+    func collectAllFetchDataInThreeDays() {
         Publishers.Zip3(shortTermForecastWeatherPublisher, particulateMatterPublisher, sunsetAndSunrisePublisher).receive(on: DispatchQueue.main).sink { completion in
             switch completion {
             case .finished:
@@ -575,6 +579,52 @@ class WeatherController: UIViewController {
         }.store(in: &cancellables)
 
     }
+    
+    
+    func collectAllFetchDataInTenDays() {
+        Publishers.Zip(shortTermForecastWeatherPublisher, longTermForecastWeatherPublisher).receive(on: DispatchQueue.main).sink { completion in
+            switch completion {
+            case .finished:
+                print("모든 데이터가 잘 들어왔습니다")
+            }
+        } receiveValue: { [weak self] shortTerm, longterm in // self의 RC값을 올리지 않음
+            
+            guard let shortTermData = shortTerm?.forecastResponse.forecastBody.forecastItems.forecastItem else { return }
+            
+            for shortTerm in shortTermData {
+                let newFormatter = DateFormatter()
+                newFormatter.dateFormat = "yyyyMMdd"
+                let shortTermDate = newFormatter.date(from: shortTerm.fcstDate)!
+                
+                let weekday: Int = Calendar.current.component(.weekday, from: shortTermDate)
+                print("현재의 요일은 \(weekday)입니다.")
+                
+                switch weekday {
+                case 1:
+                    self?.tenDaysForecastView.weekday = "일"
+                case 2:
+                    self?.tenDaysForecastView.weekday = "월"
+                case 3:
+                    self?.tenDaysForecastView.weekday = "화"
+                case 4:
+                    self?.tenDaysForecastView.weekday = "수"
+                case 5:
+                    self?.tenDaysForecastView.weekday = "목"
+                case 6:
+                    self?.tenDaysForecastView.weekday = "금"
+                case 7:
+                    self?.tenDaysForecastView.weekday = "토"
+                default:
+                    break
+                }
+                
+                
+            }
+            
+            
+        }
+    }
+    
     
     
     // MARK: - Fetch Network

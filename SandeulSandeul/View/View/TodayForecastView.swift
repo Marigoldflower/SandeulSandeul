@@ -9,16 +9,12 @@ import UIKit
 import SnapKit
 import SDWebImage
 
+// Weather 이미지를 넣기 위해 사용될 enum 
 enum Weather: String {
     case sunny = "1"
     case cloudy = "3"
     case blur = "4"
 }
-
-enum Precipitation {
-    
-}
-
 
 
 final class TodayForecastView: UIView {
