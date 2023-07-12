@@ -9,9 +9,8 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>IBMPlexSansKR-Regular.otf</string>
-		<string>IBMPlexSansKR-Medium.otf</string>
-		<string>Apple SD Gothic Neo Bold.otf</string>
+		<string>Poppins-Medium.otf</string>
+		<string>Poppins-SemiBold.otf</string>
 	</array>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>현재 위치의 날씨, 미세먼지 확인을 위해 산들산들이 현재 위치에 접근합니다.</string>

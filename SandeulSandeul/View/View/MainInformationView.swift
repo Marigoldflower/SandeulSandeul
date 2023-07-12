@@ -11,65 +11,76 @@ import SnapKit
 final class MainInformationView: UIView {
     
     
-    // MARK: - 오늘의 날씨
+    // MARK: - Page Control
     
-    lazy var todayWeatherIs: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 25)
-        return label
+    let pageControl: UIPageControl = {
+        let page = UIPageControl()
+        page.numberOfPages = 3
+        page.backgroundColor = .searchControllerWhite
+        page.pageIndicatorTintColor = .pageIndicatorGray
+        page.currentPageIndicatorTintColor = .currentPageIndicatorDarkBlue
+        page.layer.cornerRadius = 5
+        return page
     }()
     
-    let todaySky: UILabel = {
-        let label = UILabel()
-        label.text = "--"
-        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 25)
-        return label
+    
+    // MARK: - 현재 날씨 이미지
+    
+    let todayWeatherImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "sun.max.fill")?.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = .dayOrange
+        return imageView
     }()
+    
     
     
     // MARK: - 현재 온도
     
     let todayWeatherCelsius: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 60)
-        label.text = "--"
+        label.font = UIFont(name: "Poppins-Medium", size: 66.38)
+        label.text = "32"
+        label.textColor = .dayOrange
         return label
     }()
     
     
     let celsiusLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 60)
+        label.font = UIFont(name: "Poppins-Medium", size: 35)
         label.text = "°"
+        label.textColor = .dayOrange
         return label
     }()
     
     
     
-    // MARK: - 최고 온도 & 최저 온도
+    // MARK: - 현재 지역과 날씨 상태
     
-    lazy var highestCelsius: UILabel = {
+    lazy var currentLocation: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
-        label.text = "최고: --"
+        label.font = UIFont(name: "Poppins-Semibold", size: 24)
+        label.text = "--, "
+        label.textColor = .dayOrange
         return label
     }()
     
-    
-    lazy var lowestCelsius: UILabel = {
+    let currentSky: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
-        label.text = "최저: --"
+        label.text = "맑음"
+        label.font = UIFont(name: "Poppins-Semibold", size: 24)
+        label.textColor = .dayOrange
         return label
     }()
-    
     
     
     // MARK: - 미세 & 초미세
     
     let particulateMatter: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
+        label.font = UIFont(name: "Poppins-Semibold", size: 18)
+        label.textColor = .dayText
         label.text = "미세: --"
         return label
     }()
@@ -78,8 +89,9 @@ final class MainInformationView: UIView {
     
     let ultraParticulateMatter: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
+        label.font = UIFont(name: "Poppins-Semibold", size: 18)
         label.text = "초미세: --"
+        label.textColor = .dayText
         return label
     }()
     
@@ -88,27 +100,53 @@ final class MainInformationView: UIView {
 //            print("미세먼지 값이 들어왔습니다 \(particulateMatterStore)")
 //        }
 //    }
-//    
+//
 //    var ultraParticulateMatterStore = "" {
 //        didSet {
 //            print("초미세먼지 값이 들어왔습니다 \(ultraParticulateMatterStore)")
 //        }
 //    }
     
+    
+    
+    
+    // MARK: - 최고 온도 & 최저 온도
+    
+    lazy var highestCelsius: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Poppins-Semibold", size: 18)
+        label.text = "최고: --"
+        label.textColor = .dayText
+        return label
+    }()
+    
+    
+    lazy var lowestCelsius: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Poppins-Semibold", size: 18)
+        label.text = "최저: --"
+        label.textColor = .dayText
+        return label
+    }()
+    
+
+    
     // MARK: - 일출, 일몰 시간
     
     let sunrise: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
+        label.font = UIFont(name: "Poppins-Semibold", size: 18)
         label.text = "일출: --"
+        label.textColor = .dayText
         return label
     }()
     
     
     let sunset: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
+        label.font = UIFont(name: "Poppins-Semibold", size: 18)
         label.text = "일몰: --"
+        label.textColor = .dayText
         return label
     }()
     
@@ -116,30 +154,13 @@ final class MainInformationView: UIView {
     
     
     // MARK: - StackView
+   
     
-    // 오늘의 날씨와 구름 상태를 알리는 스택 뷰
-    lazy var todayIs: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [todayWeatherIs, todaySky])
+    // 현재 위치와 현재 날씨 상태를
+    lazy var currentStatus: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [currentLocation, currentSky])
         stack.axis = .horizontal
         stack.spacing = 4
-        return stack
-    }()
-    
-    
-    // 최고 & 최저 기온 스택 뷰
-    lazy var highLowCelciusStackView: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [highestCelsius, lowestCelsius])
-        stack.axis = .horizontal
-        stack.spacing = 20
-        stack.distribution = .fillEqually
-        return stack
-    }()
-    
-    // 오늘의 온도를 알려주는 스택 뷰
-    lazy var totalTodayWeatherCelsisus: UIStackView = {
-        let stack = UIStackView(arrangedSubviews: [todayWeatherCelsius, celsiusLabel])
-        stack.axis = .horizontal
-        stack.spacing = 1
         return stack
     }()
     
@@ -154,6 +175,16 @@ final class MainInformationView: UIView {
     }()
     
     
+    // 최고 & 최저 기온 스택 뷰
+    lazy var highLowCelciusStackView: UIStackView = {
+        let stack = UIStackView(arrangedSubviews: [highestCelsius, lowestCelsius])
+        stack.axis = .horizontal
+        stack.spacing = 20
+        stack.distribution = .fillEqually
+        return stack
+    }()
+
+    
     
     // 일출 & 일몰을 알려주는 스택 뷰
     lazy var sunriseAndSunsetStackView: UIStackView = {
@@ -167,10 +198,13 @@ final class MainInformationView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.addSubview(todayIs)
-        self.addSubview(totalTodayWeatherCelsisus)
-        self.addSubview(highLowCelciusStackView)
+        self.addSubview(pageControl)
+        self.addSubview(todayWeatherImage)
+        self.addSubview(todayWeatherCelsius)
+        self.addSubview(celsiusLabel)
+        self.addSubview(currentStatus)
         self.addSubview(particulateMatterStackView)
+        self.addSubview(highLowCelciusStackView)
         self.addSubview(sunriseAndSunsetStackView)
         setupLayout()
     }
@@ -183,30 +217,53 @@ final class MainInformationView: UIView {
     
     func setupLayout() {
         
-        todayIs.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top).offset(10)
+        pageControl.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(self.snp.top).offset(0)
+        }
+        
+        todayWeatherImage.snp.makeConstraints { make in
+            make.top.equalTo(pageControl.snp.bottom).offset(25)
+            make.centerX.equalTo(self.snp.centerX)
+            make.height.equalTo(118)
+            make.width.equalTo(125)
+        }
+        
+        
+        todayWeatherCelsius.snp.makeConstraints { make in
+            make.top.equalTo(todayWeatherImage.snp.bottom)
             make.centerX.equalTo(self.snp.centerX)
         }
         
-        totalTodayWeatherCelsisus.snp.makeConstraints { make in
-            make.top.equalTo(todayIs.snp.bottom).offset(5)
-            make.centerX.equalTo(self.snp.centerX)
+        
+        celsiusLabel.snp.makeConstraints { make in
+            make.leading.equalTo(todayWeatherCelsius.snp.trailing)
+            make.top.equalTo(todayWeatherImage.snp.bottom)
         }
-
-        highLowCelciusStackView.snp.makeConstraints { make in
-            make.top.equalTo(todayWeatherCelsius.snp.bottom).offset(5)
+        
+        
+       
+        currentStatus.snp.makeConstraints { make in
+            make.top.equalTo(todayWeatherCelsius.snp.bottom).offset(-7)
             make.centerX.equalTo(self.snp.centerX)
         }
         
         
         particulateMatterStackView.snp.makeConstraints { make in
-            make.top.equalTo(highLowCelciusStackView.snp.bottom).offset(5)
+            make.top.equalTo(currentStatus.snp.bottom).offset(40)
             make.centerX.equalTo(self.snp.centerX)
         }
         
+
+        highLowCelciusStackView.snp.makeConstraints { make in
+            make.top.equalTo(particulateMatterStackView.snp.bottom).offset(5)
+            make.centerX.equalTo(self.snp.centerX)
+        }
+        
+   
         
         sunriseAndSunsetStackView.snp.makeConstraints { make in
-            make.top.equalTo(particulateMatterStackView.snp.bottom).offset(5)
+            make.top.equalTo(highLowCelciusStackView.snp.bottom).offset(5)
             make.centerX.equalTo(self.snp.centerX)
         }
         

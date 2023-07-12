@@ -26,7 +26,7 @@ final class TodayForecastView: UIView {
         flowLayout.minimumLineSpacing = 0 // 아이템 위 아래 간격 설정
         // ⭐️ 코드로 컬렉션 뷰를 생성할 때에는 반드시 파라미터가 존재해야 한다. ⭐️
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.backgroundColor = .morningDeep
+        collectionView.backgroundColor = .yellow
         return collectionView
     }()
     

@@ -10,13 +10,13 @@ import Foundation
 
 // MARK: - LongTermForecast
 struct LongTermForecastWeather: Codable {
-    let response: Response
+    let response: Response?
 }
 
 // MARK: - Response
 struct Response: Codable {
     let header: Header
-    let body: Body
+    let body: Body?
 }
 
 // MARK: - Body

@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import Alamofire
 
+// 미세먼지를 알려주기 위해 에어코리아 사이트를 사용하면 반드시 앱 배포 전에 개발보고서를 작성해서 에어코리아에 제출해야 한다. ⭐️⭐️⭐️
 
 final class ParticulateMatterNetworkManager {
     
@@ -30,7 +31,7 @@ final class ParticulateMatterNetworkManager {
         // 단기예보는 0210, 0510, 0810, 1110, 1410, 1710, 2010, 2310 시에 확인할 수 있다. (1일 8회만 확인 가능)
         // 0200로 설정하면 데이터를 그 날 하루의 데이터를 언제든지 받아볼 수 있다. ⭐️
         
-        let url = "https://apis.data.go.kr/B552584/ArpltnStatsSvc/getCtprvnMesureLIst?serviceKey=\(serviceKey)&returnType=json&numOfRows=10&pageNo=1&itemCode=PM10&dataGubun=HOUR&searchCondition=WEEK"
+        let url = "https://apis.data.go.kr/B552584/ArpltnStatsSvc/getCtprvnMesureLIst?serviceKey=\(serviceKey)&returnType=json&numOfRows=10&pageNo=1&itemCode=\(density)&dataGubun=HOUR&searchCondition=WEEK"
         
       
         

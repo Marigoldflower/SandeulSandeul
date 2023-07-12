@@ -23,14 +23,12 @@ final class LongTermForecastWeatherNetworkManager {
         
         // MARK: - 현재 시간
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMddHHmm"
+        formatter.dateFormat = "yyyyMMdd"
         let today = formatter.string(from: Date())
         print("오늘의 날짜는 \(today)")
         
         
-        // 단기예보는 0210, 0510, 0810, 1110, 1410, 1710, 2010, 2310 시에 확인할 수 있다. (1일 8회만 확인 가능)
-        // 0200로 설정하면 데이터를 그 날 하루의 데이터를 언제든지 받아볼 수 있다. ⭐️
-        let url = "https://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa?serviceKey=\(serviceKey)&pageNo=1&numOfRows=1000&dataType=JSON&regId=\(regionID)&tmFc=\(today)"
+        let url = "https://apis.data.go.kr/1360000/MidFcstInfoService/getMidTa?serviceKey=\(serviceKey)&pageNo=1&numOfRows=1000&dataType=JSON&regId=\(regionID)&tmFc=\(today)0600"
  
         return Future<LongTermForecastWeather, Never> { promise in
             AF.request(url).validate().responseDecodable(of: LongTermForecastWeather.self) { response in

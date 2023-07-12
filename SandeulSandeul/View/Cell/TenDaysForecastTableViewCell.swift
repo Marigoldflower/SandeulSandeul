@@ -15,7 +15,7 @@ class TenDaysForecastTableViewCell: UITableViewCell {
     let weekend: UILabel = {
         let label = UILabel()
         label.text = "--"
-        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 25)
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
         return label
     }()
     
@@ -30,15 +30,15 @@ class TenDaysForecastTableViewCell: UITableViewCell {
     let highestTemperature: UILabel = {
         let label = UILabel()
         label.text = "--"
-        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 25)
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
         return label
     }()
     
     
     let divider: UILabel = {
         let label = UILabel()
-        label.text = " /"
-        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 25)
+        label.text = "|"
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
         return label
     }()
     
@@ -46,7 +46,7 @@ class TenDaysForecastTableViewCell: UITableViewCell {
     let lowestTemperature: UILabel = {
         let label = UILabel()
         label.text = "--"
-        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 25)
+        label.font = UIFont(name: "AppleSDGothicNeo-Medium", size: 18)
         return label
     }()
     
@@ -58,8 +58,8 @@ class TenDaysForecastTableViewCell: UITableViewCell {
     lazy var highestLowestTemperature: UIStackView = {
         let stack = UIStackView(arrangedSubviews: [highestTemperature, divider, lowestTemperature])
         stack.axis = .horizontal
-        stack.spacing = 5
-        stack.distribution = .fillEqually
+        stack.spacing = 15
+        stack.distribution = .fill
         return stack
     }()
     
@@ -69,6 +69,7 @@ class TenDaysForecastTableViewCell: UITableViewCell {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         self.addSubview(weekend)
         self.addSubview(todayWeatherImage)
+        self.addSubview(highestTemperature)
         self.addSubview(highestLowestTemperature)
         setupLayout()
     }
@@ -91,6 +92,11 @@ class TenDaysForecastTableViewCell: UITableViewCell {
             make.width.height.equalTo(45)
         }
         
+        
+//        highestTemperature.snp.makeConstraints { make in
+//            make.trailing.equalTo(highestLowestTemperature.snp.leading).offset(-5)
+//            make.centerY.equalToSuperview()
+//        }
         
         highestLowestTemperature.snp.makeConstraints { make in
             make.trailing.equalTo(self.snp.trailing).offset(-15)

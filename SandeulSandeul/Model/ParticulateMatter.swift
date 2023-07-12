@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - ParticulateMatter
 struct ParticulateMatter: Codable {
-    let particulateMatterResponse: ParticulateMatterResponse
+    let particulateMatterResponse: ParticulateMatterResponse?
     
     enum CodingKeys: String, CodingKey {
         case particulateMatterResponse = "response"
@@ -18,14 +18,14 @@ struct ParticulateMatter: Codable {
 
 // MARK: - Response
 struct ParticulateMatterResponse: Codable {
-    let body: ParticulateMatterBody
+    let body: ParticulateMatterBody?
     let header: ParticulateMatterHeader
 }
 
 // MARK: - Body
 struct ParticulateMatterBody: Codable {
     let totalCount: Int
-    let items: [ParticulateMatterItem]
+    let items: [ParticulateMatterItem]?
     let pageNo, numOfRows: Int
 }
 
@@ -36,12 +36,9 @@ struct ParticulateMatterItem: Codable {
     let gangwon, ulsan, jeonnam, seoul: String
     let busan, jeju, chungbuk, gyeongnam: String
     let dataTime, dataGubun, gyeonggi: String
-    let itemCode: ItemCode
+    let itemCode: String
 }
 
-enum ItemCode: String, Codable {
-    case pm10 = "PM10"
-}
 
 // MARK: - Header
 struct ParticulateMatterHeader: Codable {

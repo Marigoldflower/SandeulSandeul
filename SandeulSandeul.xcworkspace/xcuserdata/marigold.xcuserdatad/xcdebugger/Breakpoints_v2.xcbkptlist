@@ -3,4 +3,69 @@
    uuid = "2037FA2E-23BD-49A8-91BD-28BB19984BD4"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EB9A9886-0A38-4599-9A3A-024541AE16AA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SandeulSandeul/Network/ShortTermForecastWeatherNetworkManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "fetchNetwork(x:y:baseTime:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EB9A9886-0A38-4599-9A3A-024541AE16AA - 492968875308af7d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SandeulSandeul.ShortTermForecastWeatherNetworkManager.fetchNetwork(x: Swift.Int, y: Swift.Int, baseTime: Swift.String) -&gt; Combine.AnyPublisher&lt;SandeulSandeul.ShortTermForecastWeather, Swift.Never&gt;"
+                  moduleName = "SandeulSandeul"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marigold/Desktop/MyPrivateApp/SandeulSandeul/SandeulSandeul/Network/ShortTermForecastWeatherNetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "2016">
+               </Location>
+               <Location
+                  uuid = "EB9A9886-0A38-4599-9A3A-024541AE16AA - 7b90a6ca63c06a70"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 ((Swift.Result&lt;SandeulSandeul.ShortTermForecastWeather, Swift.Never&gt;) -&gt; ()) -&gt; () in SandeulSandeul.ShortTermForecastWeatherNetworkManager.fetchNetwork(x: Swift.Int, y: Swift.Int, baseTime: Swift.String) -&gt; Combine.AnyPublisher&lt;SandeulSandeul.ShortTermForecastWeather, Swift.Never&gt;"
+                  moduleName = "SandeulSandeul"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marigold/Desktop/MyPrivateApp/SandeulSandeul/SandeulSandeul/Network/ShortTermForecastWeatherNetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "164">
+               </Location>
+               <Location
+                  uuid = "EB9A9886-0A38-4599-9A3A-024541AE16AA - 492968875308af7d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SandeulSandeul.ShortTermForecastWeatherNetworkManager.fetchNetwork(x: Swift.Int, y: Swift.Int, baseTime: Swift.String) -&gt; Combine.AnyPublisher&lt;SandeulSandeul.ShortTermForecastWeather, Swift.Never&gt;"
+                  moduleName = "SandeulSandeul"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/marigold/Desktop/MyPrivateApp/SandeulSandeul/SandeulSandeul/Network/ShortTermForecastWeatherNetworkManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "2044">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

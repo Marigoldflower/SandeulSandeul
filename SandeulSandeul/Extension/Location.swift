@@ -10,6 +10,8 @@ import CoreLocation
 import Contacts
 
 
+
+
 extension CLLocation {
     
     func placemark(completion: @escaping (_ placemark: CLPlacemark?, _ error: Error?) -> ()) {
@@ -44,7 +46,7 @@ extension CLPlacemark {
 }
 
 
-// MARK: - 우리나라 시도 명칭
+// MARK: - 우리나라 시도 명칭 (미세먼지 측정을 위한 변수값)
 
 var daegu: String { "대구광역시" }
 var chungnam: String { "충청남도" }
@@ -70,6 +72,9 @@ var gyeonggi: String { "경기도" }
 // MARK: - 미세먼지 농도를 측정하기 위해 필요한 지역 이름을 담은 메소드
 
 func searchLocation(location: String) -> String{
+    
+    print("지금 들어오는 값은 \(location)")
+    
     switch location {
     case daegu:
         return "daegu"
@@ -108,7 +113,6 @@ func searchLocation(location: String) -> String{
     default: return ""
     }
 }
-
 
 
 
@@ -359,53 +363,182 @@ func searchRegionCode(location: String) -> String {
         return "11F20701"
     } else if location.contains("목포") {
         return "21F20801"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    } else if location.contains("증평") {
-        return "11C10304"
-    }
-        
-        
-    else if location.contains("용인") {
-        return "11B20612"
+    } else if location.contains("영암") {
+        return "21F20802"
+    } else if location.contains("신안") {
+        return "21F20803"
+    } else if location.contains("무안") {
+        return "21F20804"
+    } else if location.contains("성산") {
+        return "11G00101"
+    } else if location.contains("제주") {
+        return "11G00201"
+    } else if location.contains("성판악") {
+        return "11G00302"
+    } else if location.contains("서귀포") {
+        return "11G00401"
+    } else if location.contains("고산") {
+        return "11G00501"
+    } else if location.contains("이어도") {
+        return "11G00601"
+    } else if location.contains("추자도") {
+        return "11G00800"
+    } else if location.contains("울진") {
+        return "11H10101"
+    } else if location.contains("영덕") {
+        return "11H10102"
+    } else if location.contains("포항") {
+        return "11H10201"
+    } else if location.contains("경주") {
+        return "11H10202"
+    } else if location.contains("문경") {
+        return "11H10301"
+    } else if location.contains("상주") {
+        return "11H10302"
+    } else if location.contains("예천") {
+        return "11H10303"
+    } else if location.contains("영주") {
+        return "11H10401"
+    } else if location.contains("봉화") {
+        return "11H10402"
+    } else if location.contains("영양") {
+        return "11H10403"
+    } else if location.contains("안동") {
+        return "11H10501"
+    } else if location.contains("의성") {
+        return "11H10502"
+    } else if location.contains("청송") {
+        return "11H10503"
+    } else if location.contains("김천") {
+        return "11H10601"
+    } else if location.contains("구미") {
+        return "11H10602"
+    } else if location.contains("군위") {
+        return "11H10603"
+    } else if location.contains("고령") {
+        return "11H10604"
+    } else if location.contains("성주") {
+        return "11H10605"
+    } else if location.contains("대구") {
+        return "11H10701"
+    } else if location.contains("영천") {
+        return "11H10702"
+    } else if location.contains("경산") {
+        return "11H10703"
+    } else if location.contains("청도") {
+        return "11H10704"
+    } else if location.contains("칠곡") {
+        return "11H10705"
+    } else if location.contains("울산") {
+        return "11H20101"
+    } else if location.contains("양산") {
+        return "11H20102"
+    } else if location.contains("부산") {
+        return "11H20201"
+    } else if location.contains("창원") {
+        return "11H20301"
+    } else if location.contains("김해") {
+        return "11H20304"
+    } else if location.contains("통영") {
+        return "11H20401"
+    } else if location.contains("사천") {
+        return "11H20402"
+    } else if location.contains("거제") {
+        return "11H20403"
+    } else if location.contains("고성") {
+        return "11H20404"
+    } else if location.contains("남해") {
+        return "11H20405"
+    } else if location.contains("함양") {
+        return "11H20501"
+    } else if location.contains("거창") {
+        return "11H20502"
+    } else if location.contains("합천") {
+        return "11H20503"
+    } else if location.contains("밀양") {
+        return "11H20601"
+    } else if location.contains("의령") {
+        return "11H20602"
+    } else if location.contains("함안") {
+        return "11H20603"
+    } else if location.contains("창녕") {
+        return "11H20604"
+    } else if location.contains("진주") {
+        return "11H20701"
+    } else if location.contains("산청") {
+        return "11H20703"
+    } else if location.contains("하동") {
+        return "11H20704"
+    } else if location.contains("사리원") {
+        return "11I10001"
+    } else if location.contains("신계") {
+        return "11I10002"
+    } else if location.contains("해주") {
+        return "11I20001"
+    } else if location.contains("개성") {
+        return "11I20002"
+    } else if location.contains("장연") {
+        return "11I20003"
+    } else if location.contains("용연") {
+        return "11I20003"
+    } else if location.contains("신의주") {
+        return "11J10001"
+    } else if location.contains("삭주") {
+        return "11J10002"
+    } else if location.contains("수풍") {
+        return "11J10002"
+    } else if location.contains("구성") {
+        return "11J10003"
+    } else if location.contains("자성") {
+        return "11J10004"
+    } else if location.contains("종강") {
+        return "11J10004"
+    } else if location.contains("강계") {
+        return "11J10005"
+    } else if location.contains("희천") {
+        return "11J10006"
+    } else if location.contains("평양") {
+        return "11J20001"
+    } else if location.contains("진남포") {
+        return "11J20002"
+    } else if location.contains("남포") {
+        return "11J20002"
+    } else if location.contains("안주") {
+        return "11J20004"
+    } else if location.contains("양덕") {
+        return "11J20005"
+    } else if location.contains("청진") {
+        return "11K10001"
+    } else if location.contains("웅기") {
+        return "11K10002"
+    } else if location.contains("선봉") {
+        return "11K10002"
+    } else if location.contains("성진") {
+        return "11K10003"
+    } else if location.contains("무산") {
+        return "11K10004"
+    } else if location.contains("삼지연") {
+        return "11K10004"
+    } else if location.contains("함흥") {
+        return "11K20001"
+    } else if location.contains("장진") {
+        return "11K20002"
+    } else if location.contains("북청") {
+        return "11K20003"
+    } else if location.contains("신포") {
+        return "11K20003"
+    } else if location.contains("혜산") {
+        return "11K20004"
+    } else if location.contains("풍산") {
+        return "11K20005"
+    } else if location.contains("원산") {
+        return "11L10001"
+    } else if location.contains("고성") {
+        return "11L10002"
+    } else if location.contains("장전") {
+        return "11L10002"
+    } else if location.contains("평강") {
+        return "11L10003"
     }
     
     return ""
