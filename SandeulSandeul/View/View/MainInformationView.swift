@@ -28,8 +28,8 @@ final class MainInformationView: UIView {
     
     let todayWeatherImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "sun.max.fill")?.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = .dayOrange
+//        imageView.image = UIImage(systemName: "sun.max.fill")?.withRenderingMode(.alwaysTemplate)
+//        imageView.tintColor = .dayOrange
         return imageView
     }()
     
@@ -40,8 +40,8 @@ final class MainInformationView: UIView {
     let todayWeatherCelsius: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Medium", size: 66.38)
-        label.text = "32"
-        label.textColor = .dayOrange
+        label.text = "--"
+        label.textColor = .dayImage
         return label
     }()
     
@@ -50,7 +50,7 @@ final class MainInformationView: UIView {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Medium", size: 35)
         label.text = "°"
-        label.textColor = .dayOrange
+        label.textColor = .dayImage
         return label
     }()
     
@@ -62,15 +62,15 @@ final class MainInformationView: UIView {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Semibold", size: 24)
         label.text = "--, "
-        label.textColor = .dayOrange
+        label.textColor = .dayImage
         return label
     }()
     
     let currentSky: UILabel = {
         let label = UILabel()
-        label.text = "맑음"
+        label.text = "--"
         label.font = UIFont(name: "Poppins-Semibold", size: 24)
-        label.textColor = .dayOrange
+        label.textColor = .dayImage
         return label
     }()
     
@@ -80,8 +80,8 @@ final class MainInformationView: UIView {
     let particulateMatter: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Semibold", size: 18)
-        label.textColor = .dayText
         label.text = "미세: --"
+        label.textColor = .daySideLabel
         return label
     }()
     
@@ -91,12 +91,12 @@ final class MainInformationView: UIView {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Semibold", size: 18)
         label.text = "초미세: --"
-        label.textColor = .dayText
+        label.textColor = .daySideLabel
         return label
     }()
     
 //    var particulateMatterStore = "" {
-//        didSet {
+//        didSet { 
 //            print("미세먼지 값이 들어왔습니다 \(particulateMatterStore)")
 //        }
 //    }
@@ -116,7 +116,7 @@ final class MainInformationView: UIView {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Semibold", size: 18)
         label.text = "최고: --"
-        label.textColor = .dayText
+        label.textColor = .daySideLabel
         return label
     }()
     
@@ -125,7 +125,7 @@ final class MainInformationView: UIView {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Semibold", size: 18)
         label.text = "최저: --"
-        label.textColor = .dayText
+        label.textColor = .daySideLabel
         return label
     }()
     
@@ -137,7 +137,7 @@ final class MainInformationView: UIView {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Semibold", size: 18)
         label.text = "일출: --"
-        label.textColor = .dayText
+        label.textColor = .daySideLabel
         return label
     }()
     
@@ -146,7 +146,7 @@ final class MainInformationView: UIView {
         let label = UILabel()
         label.font = UIFont(name: "Poppins-Semibold", size: 18)
         label.text = "일몰: --"
-        label.textColor = .dayText
+        label.textColor = .daySideLabel
         return label
     }()
     

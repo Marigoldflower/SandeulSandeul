@@ -163,15 +163,15 @@ class WeatherController: UIViewController {
         didSet {
             print("myStateLocation에 값이 담겼습니다! \(myStateLocation)")
             // gyeonggi라는 결과값을 particulateMatterData에 할당한다.
-            particulateMatterData = searchLocation(location: myStateLocation)
-            ultraParticulateMatterData = searchLocation(location: myStateLocation)
+            particulateMatterLocation = searchLocation(location: myStateLocation)
+            ultraParticulateMatterLocation = searchLocation(location: myStateLocation)
             
         }
     }
     
     
     // gyeonggi 라는 값이 현재 담겨 있음. 추후에 switch문을 통해 gyeonggi 라는 값과 일치하는 값을 출력하도록 만들 것임
-    var particulateMatterData = "" {
+    var particulateMatterLocation = "" {
         didSet {
             fetchParticulateMatterNetwork(density: "PM10")
             bindCurrentData()
@@ -181,7 +181,7 @@ class WeatherController: UIViewController {
     
     
     
-    var ultraParticulateMatterData = "" {
+    var ultraParticulateMatterLocation = "" {
         didSet {
             fetchUltraParticulateMatterNetwork(density: "PM25")
             bindCurrentData()
@@ -290,6 +290,7 @@ class WeatherController: UIViewController {
         // (한 번 허용, 앱을 사용하는 동안 허용, 허용 안 함) 문구가 적혀있는 창을 띄움
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+//        locationManager.requestLocation()
         
     }
     
@@ -308,15 +309,48 @@ class WeatherController: UIViewController {
         } receiveValue: { [weak self] particulate, ultraParticulate, temperature, sunset in
             
             
+            // MARK: - 일출 & 일몰 영역
+            
+            // 오늘 날짜 중 일출 & 일몰 시간 구하기
+            
+            guard let sunriseString = sunset?.results.sunrise else { return }
+            guard let sunsetString = sunset?.results.sunset else { return }
+            
+            
+            // 1. 먼저 Sunrise, Sunset을 Date 타입으로 만들어 UTC 시간보다 9시간 더 빠르게 만들 것이다.
+            let formatter = DateFormatter()
+            formatter.timeStyle = .medium
+            
+            guard let sunriseDate = formatter.date(from: sunriseString) else { return }
+            guard let sunsetDate = formatter.date(from: sunsetString) else { return }
+            
+            let sunriseData = sunriseDate.addingTimeInterval(32400)
+            let sunsetData = sunsetDate.addingTimeInterval(32400)
+            
+            
+            // 2. 만들어진 Date 타입을 String 값으로 다시 변환하여 View에서 사용할 수 있도록 만들어준다.
+            let sunDateFormatter = DateFormatter()
+            sunDateFormatter.dateFormat = "HH:mm"
+            
+            let sunrise = sunDateFormatter.string(from: sunriseData)
+            let sunset = sunDateFormatter.string(from: sunsetData)
+            
+            
+            
+            
+//                    self?.mainInformationView.sunrise.attributedText = coloringTextMethod(text: "일출", colorText: sunrise, color: .nightDataText)
+//                    self?.mainInformationView.sunset.attributedText = coloringTextMethod(text: "일몰", colorText: sunset, color: .nightDataText)
+            
+            
             // MARK: - 미세먼지 처리 영역
             
-            // 여기서 처리할 때 미세먼지 데이터가 들어왔을 수도 있고, 초미세먼지 데이터가 들어왔을 수도 있다. 
+            
             guard let particulateMatterData = particulate?.particulateMatterResponse?.body?.items else { return }
             
             
-            // particulateMatterData에는 "gyeonggi"가 들어가 있음
-            guard let particulateMatter = self?.particulateMatterData else { return }
-            self?.particulateMatterCalculatorAccordingToLocation(location: particulateMatter, particulateData: particulateMatterData)
+            // particulateMatterLocation에는 "gyeonggi"가 들어가 있음
+            guard let particulateMatterLocation = self?.particulateMatterLocation else { return }
+//            self?.particulateMatterCalculatorAccordingToLocation(location: particulateMatterLocation, particulateData: particulateMatterData)
             
             
             
@@ -324,54 +358,132 @@ class WeatherController: UIViewController {
             
             guard let ultraParticulateMatterData = ultraParticulate?.particulateMatterResponse?.body?.items else { return }
             
-            
-            guard let ultraParticulateMatter = self?.ultraParticulateMatterData else { return }
-            self?.particulateMatterCalculatorAccordingToLocation(location: ultraParticulateMatter, particulateData: ultraParticulateMatterData)
-            
-            
+            // ultraParticulateMatterLocation에는 "gyeonggi"가 들어가 있음
+            guard let ultraParticulateMatterLocation = self?.ultraParticulateMatterLocation else { return }
+//            self?.particulateMatterCalculatorAccordingToLocation(location: ultraParticulateMatterLocation, particulateData: ultraParticulateMatterData)
             
             
             
-            // MARK: - 최고 & 최저 온도 영역
             
+            // MARK: - 현재 온도 처리 영역
             
             guard let temperatureData = temperature?.forecastResponse.forecastBody.forecastItems.forecastItem else { return }
             
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyyMMdd"
+            let today = dateFormatter.string(from: Date())
+            
+            
             
             for currentData in temperatureData {
-                // 최고 온도일 경우
-                if currentData.category.rawValue == "TMX" {
+                // 현재 날짜가 오늘 날짜인 경우
+                if currentData.fcstDate == today {
                     
-                    guard let todayWeather = self?.mainInformationView.todayWeatherCelsius.text else { return }
-                    print("todayWeather의 값은 \(todayWeather)")
+                    let timeFormatter = DateFormatter()
+                    timeFormatter.dateFormat = "HH"
+                    let currentTime = timeFormatter.string(from: Date())
                     
-                    let currentTemperature = Double(todayWeather) ?? 0.0
-                    let highestTemperature = Double(currentData.fcstValue) ?? 0.0
-                    
-                    print("현재 온도는 \(currentTemperature)")
-                    print("최고 온도는 \(highestTemperature)")
-                    
-                    // 현재 온도와 최고 온도를 비교해서 최고 온도가 더 적으면 현재 온도를 최고 온도로 할당한다.
-                    if currentTemperature > highestTemperature {
-                        let stringHighestTemperature = String(currentTemperature)
-                        UserDefaults.standard.currentTemperature = stringHighestTemperature
-                        self?.mainInformationView.highestCelsius.text = "최고: " + UserDefaults.standard.currentTemperature + "°"
-                        print("현재 온도가 실행되었습니다")
-                    } else {
-                        self?.mainInformationView.highestCelsius.text = "최고: " + currentData.fcstValue + "°"
-                        print("최고 온도가 실행되었습니다")
+                    // 현재 시간이 currentTime의 HH 값을 포함하고 있다면 (현재 시간에 속한다면)
+                    if currentData.fcstTime.contains(currentTime) {
+                        // TMP 코드 (현재 시간의 온도)만 골라서
+                        if currentData.category.rawValue == "TMP" {
+                            // 그 값을 todayWeatherCelsius 값에 할당한다.
+                            self?.mainInformationView.todayWeatherCelsius.text = currentData.fcstValue
+                            // 여기다가 현재 날씨 상태에 따라서 todayWeatherCelsius의 색깔을 변경시켜줘야 한다. (mainLabel)
+                            self?.todayForecastView.todayTime = currentData.fcstTime
+                            self?.todayForecastView.todayTemperature = currentData.fcstValue
+                        }
                     }
-                }
-                
-                // 최저 온도일 경우
-                if currentData.category.rawValue == "TMN" {
-                    self?.mainInformationView.lowestCelsius.text = "최저: " + currentData.fcstValue + "°"
-                }
-            }
-            
-            
-            
-            
+                    
+                    // MARK: - 날씨 상태 영역
+                    
+                    // 오늘의 강수 상태를 알아보는 영역
+                    if currentData.category.rawValue == "PTY" {
+                        
+                        // PTY(강수상태)가 "0"이 아닐 때에만 실행하도록 함. 그렇지 않으면 이 코드는 그냥 지나간다.
+                        if currentData.fcstValue != "0" {
+                            let rain = "1"
+                            let rainAndSnow = "2"
+                            let snow = "3"
+                            let sonagi = "4"
+                            
+                            // "이 영역에서" 각 날씨 별 적절한 색깔을 정해줘야 한다. 날씨 상태를 구분할 수 있는 곳이 이 곳밖에 없기 때문이다.
+                            if currentData.fcstValue == rain {
+                                self?.mainInformationView.currentSky.text = "비옴"
+                                self?.changeColorAndUIAccordingToCurrentData(backgroundColor: .rainyBackground, imageColor: .rainyImage, mainLabelColor: .rainyMainLabel, sideLabelColor: .rainySideLabel, imageName: "cloud.rain.fill", sunset: sunset, sunrise: sunrise)
+
+                            } else if currentData.fcstValue == rainAndSnow {
+                                self?.mainInformationView.currentSky.text = "비와눈"
+                            } else if currentData.fcstValue == snow {
+                                self?.mainInformationView.currentSky.text = "눈옴"
+                                self?.view.backgroundColor = .snowyBackground
+                                self?.mainInformationView.backgroundColor = .snowyBackground
+                            } else if currentData.fcstValue == sonagi {
+                                self?.mainInformationView.currentSky.text = "소나기"
+                                self?.view.backgroundColor = .rainyBackground
+                                self?.mainInformationView.backgroundColor = .rainyBackground
+                            }
+                        }
+                    }
+                    
+                    
+                    // 그 후 SKY 코드를 읽게 한다.
+                    if currentData.category.rawValue == "SKY" {
+                        
+                        // 오늘 날짜의 날씨를 보냄 (배열에서 사용할 것)
+                        self?.todayForecastView.todayWeather = currentData.fcstValue
+                        
+                        let sunny = "1"
+                        let cloudy = "3"
+                        let blur = "4"
+                        
+                        if currentData.fcstValue == sunny {
+                            self?.mainInformationView.currentSky.text = "맑음"
+                        } else if currentData.fcstValue == cloudy {
+                            self?.mainInformationView.currentSky.text = "구름많음"
+                        } else if currentData.fcstValue == blur {
+                            self?.mainInformationView.currentSky.text = "흐림"
+                        }
+                        
+                    }
+                    // MARK: - 최고 & 최저 온도 영역
+                    
+                    // 오늘 날짜 중 최고 온도일 경우
+                    if currentData.category.rawValue == "TMX" {
+                        
+                        guard let todayWeather = self?.mainInformationView.todayWeatherCelsius.text else { return }
+                        print("todayWeather의 값은 \(todayWeather)")
+                        
+                        let currentTemperature = Double(todayWeather) ?? 0.0
+                        let highestTemperature = Double(currentData.fcstValue) ?? 0.0
+                        
+                        print("현재 온도는 \(currentTemperature)")
+                        print("최고 온도는 \(highestTemperature)")
+                        
+                        // 현재 온도와 최고 온도를 비교해서 최고 온도가 더 적으면 현재 온도를 최고 온도로 할당한다.
+                        if currentTemperature > highestTemperature {
+                            let stringHighestTemperature = String(currentTemperature)
+                            UserDefaults.standard.currentTemperature = stringHighestTemperature
+//                            self?.mainInformationView.highestCelsius.attributedText = coloringTextMethod(text: "최고", colorText: UserDefaults.standard.currentTemperature + "°", color: .nightDataText)
+                            
+                        } else {
+//                            self?.mainInformationView.highestCelsius.attributedText = coloringTextMethod(text: "최고", colorText: currentData.fcstValue + "°", color: .nightDataText)
+                        }
+                    }
+                    
+                    // 오늘 날짜 중 최저 온도일 경우
+                    if currentData.category.rawValue == "TMN" {
+//                        self?.mainInformationView.lowestCelsius.attributedText = coloringTextMethod(text: "최저", colorText: currentData.fcstValue + "°", color: .nightDataText)
+                    }
+                   
+                    
+                    
+                    
+                    
+                    
+                } // today
+    
+            } // currentData
             
         }.store(in: &cancellables)
 
@@ -570,28 +682,6 @@ class WeatherController: UIViewController {
 //                }
 //
 //
-//                // MARK: - Particulate 영역 (미세먼지 농도를 파악하기 위함)
-//
-//
-//                // 이 영역을 메소드로 분리해서 파라미터로 넘겨주기
-//
-//                guard let particulateMatterData = particulate?.particulateMatterResponse?.body?.items else { return }
-//
-//                // 미세먼지 농도
-//                // ~30: 좋음  ~80: 보통  ~150: 나쁨  151~: 매우나쁨
-//
-//
-//
-//                // particulateMatterData에는 "gyeonggi"가 들어가 있음
-//                guard let particulateMatter = self?.particulateMatterData else { return }
-//                self?.particulateMatterCalculatorAccordingToLocation(location: particulateMatter, particulateData: particulateMatterData)
-//
-//
-//                guard let ultraParticulateMatter = self?.ultraParticulateMatterData else { return }
-//                self?.particulateMatterCalculatorAccordingToLocation(location: ultraParticulateMatter, particulateData: particulateMatterData)
-//
-//
-//
 //                // MARK: - Sunset & Sunrise 영역 (일출과 일몰 시간을 파악하기 위함)
 //
 //                guard let sunriseString = sunset?.results.sunrise else { return }
@@ -749,143 +839,143 @@ class WeatherController: UIViewController {
     
     // MARK: - 지역에 따라 미세먼지 농도 데이터를 다르게 가져오는 메소드
     
-    func particulateMatterCalculatorAccordingToLocation(location: String, particulateData: [ParticulateMatterItem]) {
+    func particulateMatterCalculatorAccordingToLocation(location: String, particulateData: [ParticulateMatterItem], currentSky: String) {
         switch location {
         case "daegu":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].daegu)
+                    distributeParticulateMatter(density: particulateData[0].daegu, currentSky: currentSky)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].daegu)
+                    distributeUltraParticulateMatter(density: particulateData[0].daegu, currentSky: currentSky)
                 }
             }
         case "chungnam":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].chungnam)
+                    distributeParticulateMatter(density: particulateData[0].chungnam, currentSky: currentSky)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].chungnam)
+                    distributeUltraParticulateMatter(density: particulateData[0].chungnam, currentSky: currentSky)
                 }
             }
         case "incheon":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].incheon)
+                    distributeParticulateMatter(density: particulateData[0].incheon, currentSky: currentSky)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].incheon)
+                    distributeUltraParticulateMatter(density: particulateData[0].incheon, currentSky: currentSky)
                 }
             }
         case "daejeon":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].daejeon)
+                    distributeParticulateMatter(density: particulateData[0].daejeon, currentSky: currentSky)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].daejeon)
+                    distributeUltraParticulateMatter(density: particulateData[0].daejeon, currentSky: currentSky)
                 }
             }
         case "gyeongbuk":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].gyeongbuk)
+                    distributeParticulateMatter(density: particulateData[0].gyeongbuk, currentSky: currentSky)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].gyeongbuk)
+                    distributeUltraParticulateMatter(density: particulateData[0].gyeongbuk, currentSky: currentSky)
                 }
             }
         case "sejong":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].sejong)
+                    distributeParticulateMatter(density: particulateData[0].sejong, currentSky: currentSky)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].sejong)
+                    distributeUltraParticulateMatter(density: particulateData[0].sejong, currentSky: currentSky)
                 }
             }
         case "gwangju":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].gwangju)
+                    distributeParticulateMatter(density: particulateData[0].gwangju, currentSky: currentSky)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].gwangju)
+                    distributeUltraParticulateMatter(density: particulateData[0].gwangju, currentSky: currentSky)
                 }
             }
         case "jeonbuk":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].jeonbuk)
+                    distributeParticulateMatter(density: particulateData[0].jeonbuk, currentSky: currentSky)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].jeonbuk)
+                    distributeUltraParticulateMatter(density: particulateData[0].jeonbuk, currentSky: currentSky)
                 }
             }
         case "gangwon":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].gangwon)
+                    distributeParticulateMatter(density: particulateData[0].gangwon, currentSky: currentSky)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].gangwon)
+                    distributeUltraParticulateMatter(density: particulateData[0].gangwon, currentSky: currentSky)
                 }
             }
         case "ulsan":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].ulsan)
+                    distributeParticulateMatter(density: particulateData[0].ulsan, currentSky: currentSky)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].ulsan)
+                    distributeUltraParticulateMatter(density: particulateData[0].ulsan, currentSky: currentSky)
                 }
             }
         case "jeonnam":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].jeonnam)
+                    distributeParticulateMatter(density: particulateData[0].jeonnam, currentSky: currentSky)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].jeonnam)
+                    distributeUltraParticulateMatter(density: particulateData[0].jeonnam, currentSky: currentSky)
                 }
             }
         case "seoul":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].seoul)
+                    distributeParticulateMatter(density: particulateData[0].seoul, currentSky: currentSky)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].seoul)
+                    distributeUltraParticulateMatter(density: particulateData[0].seoul, currentSky: currentSky)
                 }
             }
         case "busan":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].busan)
+                    distributeParticulateMatter(density: particulateData[0].busan, currentSky: currentSky)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].busan)
+                    distributeUltraParticulateMatter(density: particulateData[0].busan, currentSky: currentSky)
                 }
             }
         case "jeju":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].jeju)
+                    distributeParticulateMatter(density: particulateData[0].jeju, currentSky: currentSky)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].jeju)
+                    distributeUltraParticulateMatter(density: particulateData[0].jeju, currentSky: currentSky)
                 }
             }
         case "chungbuk":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].chungbuk)
+                    distributeParticulateMatter(density: particulateData[0].chungbuk, currentSky: currentSky)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].chungbuk)
+                    distributeUltraParticulateMatter(density: particulateData[0].chungbuk, currentSky: currentSky)
                 }
             }
         case "gyeongnam":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].gyeongnam)
+                    distributeParticulateMatter(density: particulateData[0].gyeongnam, currentSky: currentSky)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].gyeongnam)
+                    distributeUltraParticulateMatter(density: particulateData[0].gyeongnam, currentSky: currentSky)
                 }
             }
-        case "gyeonggi": // 지금 문제가 초미세먼지 네트워크만 동작하고 있다는 점이다.
+        case "gyeonggi":
             for data in particulateData {
                 if data.itemCode == "PM10" {
-                    distributeParticulateMatter(location: particulateData[0].gyeonggi)
+                    distributeParticulateMatter(density: particulateData[0].gyeonggi, currentSky: currentSky)
 //                    distributeUltraParticulateMatter(location: particulateData[0].gyeonggi)
                 } else {
-                    distributeUltraParticulateMatter(location: particulateData[0].gyeonggi)
+                    distributeUltraParticulateMatter(density: particulateData[0].gyeonggi, currentSky: currentSky)
 //                    distributeParticulateMatter(location: particulateData[0].gyeonggi)
                 }
             }
@@ -893,119 +983,151 @@ class WeatherController: UIViewController {
 
         }
     }
-
-    
-    
-    
-    // MARK: - 미세먼지와 초미세먼지를 구분해주는 메소드
-    
-//    func distinguishParticulateAndUltra(location: String, particulateData: [ParticulateMatterItem]) {
-//        for data in particulateData {
-//            if data.itemCode == "PM10" {
-//                distributeParticulateMatter(location: particulateData[0].\(location))
-//            } else {
-//                distributeUltraParticulateMatter(location: particulateData[0].\(location))
-//            }
-//        }
-//    }
-    
-    
     
     
     // MARK: - 미세먼지 농도에 따라 좋음, 보통, 나쁨, 매우나쁨으로 나누는 메소드
     
-    func distributeParticulateMatter(location: String) {
+    func distributeParticulateMatter(density: String, currentSky: String) {
         
         particulateMatterFetchCount += 1
         
         if particulateMatterFetchCount == 1 {
-            guard let myCurrentLocation = Int(location) else { return }
-            print("미세먼지의 값은 \(myCurrentLocation)") // 미세먼지와 초미세먼지 값이 똑같은 값이 들어오고 있는 게 문제
-            // 둘 다 똑같은 값이 들어오고 있다는 것은 미세먼지 네트워크만 동작하고 있다는 의미
+            guard let myCurrentLocation = Int(density) else { return }
+            print("미세먼지의 값은 \(myCurrentLocation)")
+            
+            
             switch myCurrentLocation {
             case ...30:
-                self.mainInformationView.particulateMatter.text = "미세: 좋음"
-                self.mainInformationView.particulateMatter.attributedText = coloringTextAccordingToParticualte(particulate: "미세", density: "좋음", color: .particulateGoodColor)
+                
+                if currentSky == "맑음" {
+                    print("지금 이거 실행된 거 맞긴하냐?!")
+                    self.mainInformationView.particulateMatter.attributedText = coloringTextMethod(text: "미세", colorText: "좋음", color: .particulateGoodColorDay)
+                    print("오키도키요~")
+                } else if currentSky == "구름많음"  {
+                    
+                    print("지금 이거 실행된 거 맞긴하냐?!")
+                    self.mainInformationView.particulateMatter.attributedText = coloringTextMethod(text: "미세", colorText: "좋음", color: .particulateGoodColorDay)
+                    print("오키도키요~")
+                  
+                } else {
+                    print("지금 이거 실행된 거 맞긴하냐?!")
+                    self.mainInformationView.particulateMatter.attributedText = coloringTextMethod(text: "미세", colorText: "좋음", color: .particulateGoodColorNight)
+                    print("잘됐으~")
+                }
+                
+                // 밝은 날씨라면
+//                if self.view.backgroundColor == .dayBackground {
+//                    self.mainInformationView.particulateMatter.attributedText = coloringTextMethod(text: "미세", colorText: "좋음", color: .particulateGoodColorNight)
+//                // 어두운 날씨라면
+//                } else {
+//                    self.mainInformationView.particulateMatter.attributedText = coloringTextMethod(text: "미세", colorText: "좋음", color: .particulateGoodColorNight)
+//                }
             case 31...80:
                 self.mainInformationView.particulateMatter.text = "미세: 보통"
-                self.mainInformationView.particulateMatter.attributedText = coloringTextAccordingToParticualte(particulate: "미세", density: "보통", color: .particulateNormalColor)
+//                self.mainInformationView.particulateMatter.attributedText = coloringTextMethod(text: "미세", colorText: "보통", color: .particulateNormalColorDay)
             case 81...150:
                 self.mainInformationView.particulateMatter.text = "미세: 나쁨"
-                self.mainInformationView.particulateMatter.attributedText = coloringTextAccordingToParticualte(particulate: "미세", density: "나쁨", color: .particulateBadColor)
-    //            self.mainInformationView.particulateMatterStore = "미세: 나쁨"
+//                self.mainInformationView.particulateMatter.attributedText = coloringTextMethod(text: "미세", colorText: "나쁨", color: .particulateBadColorDay)
+//                self.mainInformationView.particulateMatterStore = "미세: 나쁨"
             case 151...:
                 self.mainInformationView.particulateMatter.text = "미세: 매우나쁨"
-                self.mainInformationView.particulateMatter.attributedText = coloringTextAccordingToParticualte(particulate: "미세", density: "매우나쁨", color: .particulateVeryBadColor)
-    //            self.mainInformationView.particulateMatterStore = "미세: 매우나쁨"
+//                self.mainInformationView.particulateMatter.attributedText = coloringTextMethod(text: "미세", colorText: "매우나쁨", color: .particulateVeryBadColorDay)
+//                self.mainInformationView.particulateMatterStore = "미세: 매우나쁨"
             default: return
             }
         }
     }
     
     
-    func distributeUltraParticulateMatter(location: String) {
+    func distributeUltraParticulateMatter(density: String, currentSky: String) {
         
         ultraParticulateMatterFetchCount += 1
         
         if ultraParticulateMatterFetchCount == 1 {
-            guard let myCurrentLocation = Int(location) else { return }
+            guard let myCurrentLocation = Int(density) else { return }
             print("초미세먼지의 값은 \(myCurrentLocation)")
             switch myCurrentLocation {
             case ...15:
                 self.mainInformationView.ultraParticulateMatter.text = "초미세: 좋음"
-                self.mainInformationView.ultraParticulateMatter.attributedText = coloringTextAccordingToParticualte(particulate: "초미세", density: "좋음", color: .particulateGoodColor)
+//                self.mainInformationView.ultraParticulateMatter.attributedText = coloringTextMethod(text: "초미세", colorText: "좋음", color: .particulateGoodColorDay)
     //            self.mainInformationView.ultraParticulateMatterStore = "초미세: 좋음"
             case 16...35:
                 self.mainInformationView.ultraParticulateMatter.text = "초미세: 보통"
-                self.mainInformationView.ultraParticulateMatter.attributedText = coloringTextAccordingToParticualte(particulate: "초미세", density: "보통", color: .particulateNormalColor)
+//                self.mainInformationView.ultraParticulateMatter.attributedText = coloringTextMethod(text: "초미세", colorText: "보통", color: .particulateNormalColorDay)
     //            self.mainInformationView.ultraParticulateMatterStore = "초미세: 보통"
             case 36...75:
                 self.mainInformationView.ultraParticulateMatter.text = "초미세: 나쁨"
-                self.mainInformationView.ultraParticulateMatter.attributedText = coloringTextAccordingToParticualte(particulate: "초미세", density: "나쁨", color: .particulateBadColor)
+//                self.mainInformationView.ultraParticulateMatter.attributedText = coloringTextMethod(text: "초미세", colorText: "나쁨", color: .particulateBadColorDay)
     //            self.mainInformationView.ultraParticulateMatterStore = "초미세: 나쁨"
             case 76...:
                 self.mainInformationView.ultraParticulateMatter.text = "초미세: 매우나쁨"
-                self.mainInformationView.ultraParticulateMatter.attributedText = coloringTextAccordingToParticualte(particulate: "초미세", density: "매우나쁨", color: .particulateVeryBadColor)
+//                self.mainInformationView.ultraParticulateMatter.attributedText = coloringTextMethod(text: "초미세", colorText: "매우나쁨", color: .particulateVeryBadColorDay)
     //            self.mainInformationView.ultraParticulateMatterStore = "초미세: 매우나쁨"
             default: return
             }
         }
     }
-    
-    
-    
-    // MARK: - 미세먼지 농도에 따라 Label 색깔에 변화를 주는 메소드
-    
-    
-    func coloringTextAccordingToParticualte(particulate: String, density: String, color: UIColor) -> NSAttributedString {
-        let stringOne = "\(particulate): \(density)"
-        let stringTwo = "\(density)"
 
-        let range = (stringOne as NSString).range(of: stringTwo)
+    
+    
+    // MARK: - 현재 위치의 날씨에 따라 앱의 색깔 및 UI를 바꾸는 메소드
+    
+    
+    // 미세먼지 색깔을 정하는 순서
+    // 1. 우선 미세먼지의 농도 (좋음, 보통, 나쁨, 매우나쁨) 에 따라서 색깔을 정한다.
+    // 2. 그 후, 날씨의 상태에 따라서 미세먼지의 농도의 색깔의 짙음과 옅음의 차이를 정해줘야 한다.
+    
+//                                self?.particulateMatterCalculatorAccordingToLocation(location: particulateMatterLocation, particulateData: particulateMatterData, currentSky: "비옴")
+    
+    // 이 메소드를 사용하기 위해서
+    // 1. 우선 미세먼지의 농도 (좋음, 보통, 나쁨, 매우나쁨)을 구분할 수 있도록 변환해줘야 한다.
+    // 그 과정은 다음과 같다.
+    // 1-1) 나의 위치 에를 들면 경기도가 영어로 우선 변환된다. ("gyeonggi")
+    // 1-2) "gyeonggi"라는 값을 가지고 Publisher와 함께 네트워크 메소드를 실행하여 해당 위치의 0번째 값을 리턴한다.
+    // 1-3) 0번째 값에는 특정 숫자가 적혀 있으며 우리는 이 숫자를 switch하여 미세먼지의 농도를 구분한다.
+    
+    
+    
+    func changeColorAndUIAccordingToCurrentData(backgroundColor: UIColor, imageColor: UIColor, mainLabelColor: UIColor, sideLabelColor: UIColor, imageName: String, sunset: String, sunrise: String) {
+        
+        // backgroundColor
+        view.backgroundColor = backgroundColor
+        mainInformationView.backgroundColor = backgroundColor
+        
+        // imageName
+        mainInformationView.todayWeatherImage.image = UIImage(systemName: imageName)?.withRenderingMode(.alwaysTemplate)
+        
+        // imageColor
+        mainInformationView.todayWeatherImage.tintColor = imageColor
+        
+        // mainLabelColor
+        mainInformationView.todayWeatherCelsius.textColor = mainLabelColor
+        mainInformationView.celsiusLabel.textColor = mainLabelColor
+        mainInformationView.currentLocation.textColor = mainLabelColor
+        mainInformationView.currentSky.textColor = mainLabelColor
+        
+        // sideLabelColor
+        mainInformationView.particulateMatter.textColor = sideLabelColor
+        mainInformationView.particulateMatter.attributedText = coloringTextMethod(text: "미세", colorText: "좋음", color: .particulateGoodColorNight)
+        mainInformationView.ultraParticulateMatter.textColor = sideLabelColor
+        mainInformationView.ultraParticulateMatter.attributedText = coloringTextMethod(text: "초미세", colorText: "나쁨", color: .particulateVeryBadColorNight)
+        
+        
+        mainInformationView.highestCelsius.textColor = sideLabelColor
+        // 이 메소드를 사용하기 위해서 ForecastItem 타입인 파라미터를 가지고 있는 메소드를 하나 만들어야 한다.
+        mainInformationView.highestCelsius.attributedText = coloringTextMethod(text: "최고", colorText: "26", color: .nightDataText)
+        
+        mainInformationView.lowestCelsius.textColor = sideLabelColor
+        // 이 메소드를 사용하기 위해서 ForecastItem 타입인 파라미터를 가지고 있는 메소드를 하나 만들어야 한다.
+        mainInformationView.lowestCelsius.attributedText = coloringTextMethod(text: "최저", colorText: "24", color: .nightDataText)
+        
+        mainInformationView.sunset.textColor = sideLabelColor
+        mainInformationView.sunset.attributedText = coloringTextMethod(text: "일출", colorText: sunset, color: .nightDataText)
+        
+        mainInformationView.sunrise.textColor = sideLabelColor
+        mainInformationView.sunrise.attributedText = coloringTextMethod(text: "일몰", colorText: sunrise, color: .nightDataText)
 
-        let attributedText = NSMutableAttributedString.init(string: stringOne)
-        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: color , range: range)
-        
-        return attributedText
-        
     }
-    
-    
-    
-    // MARK: - 일반 Lable 색깔 메소드
-    
-//    func normalTextColoringMethod() -> NSAttributedString {
-//        let stringOne = "\(particulate): \(density)"
-//        let stringTwo = "\(density)"
-//
-//        let range = (stringOne as NSString).range(of: stringTwo)
-//
-//        let attributedText = NSMutableAttributedString.init(string: stringOne)
-//        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: color , range: range)
-//
-//        return attributedText
-//    }
-    
     
     
 }
@@ -1019,22 +1141,26 @@ extension WeatherController: CLLocationManagerDelegate {
         case .authorizedAlways, .authorizedWhenInUse:
             // "앱을 사용하는 동안 허용", "한 번 허용" 버튼을 클릭하면 이 부분이 실행된다.
             print("GPS 권한 설정됨")
+//            self.locationManager.requestLocation()
             self.locationManager.startUpdatingLocation() // 중요!
             self.locationManager.stopUpdatingLocation()
         case .restricted, .notDetermined:
             // 아직 사용자의 위치가 설정되지 않았을 때 이 부분이 실행된다.
             print("GPS 권한 설정되지 않음")
+//            self.locationManager.requestLocation()
             setupLocation()
             self.locationManager.stopUpdatingLocation()
         case .denied:
             // "허용 안 함" 버튼을 클릭하면 이 부분이 실행된다.
             print("GPS 권한 요청 거부됨")
+//            self.locationManager.requestLocation()
             setupLocation()
             self.locationManager.stopUpdatingLocation()
         default:
             print("GPS: Default")
         }
     }
+    
     
     // 위도, 경도 정보를 얻는 메소드
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -1065,8 +1191,10 @@ extension WeatherController: CLLocationManagerDelegate {
             
             print("지금 내가 살고 있는 지역은 \(placemark.state ?? "값이 없는데?")")
             self.myStateLocation = placemark.state ?? ""
-            
         }
+        
+        locationManager.stopUpdatingLocation()
+        locationManager.delegate = nil
         
         
     }
